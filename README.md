@@ -18,6 +18,14 @@ car_name, fuel_type, engine_displacement, number_cylinder, seating_capacity, tra
 
 Como se puede ver, por cada línea tendremos el nombre de la marca y modelo del vehículo, la cilindrada, número de cilindos... Como se ha mecionado ya, estos datos serán parseados y guardados en memoria para poder realizar operaciones sobre los datos.
 
+Operaciones:
+
+- Añadir coche.
+- Eliminar coche.
+- Visualización de datos:
+  - Con filtrado.
+  - Con ordeación.
+
 ## Desarrollo, funcionamiento y peculiaridades
 
 ### Desarrollo en 3 etapas

@@ -9,6 +9,7 @@
  * - Añadir una simulación de base de datos con structs de structs.
  * - Función para acceder a datos y estadísticas.
  * - Entradas para modificación/consulta de datos.
+ * - Tratamentos de erros!
  */
 
 struct car {
@@ -55,7 +56,21 @@ file: line {
 ;
 
 line: /*vacio */
-  	| name_car fuel_type engine_displacement number_cylinder seating_capacity transmission_type fuel_tank_capacity body_type rating starting_price ending_price max_torque_nm max_torque_rpm max_power_bhp max_power_rpm line {
+  	| name_car 
+	  fuel_type
+	  engine_displacement
+	  number_cylinder
+	  seating_capacity
+	  transmission_type
+	  fuel_tank_capacity
+	  body_type rating
+	  starting_price
+	  ending_price
+	  max_torque_nm
+	  max_torque_rpm
+	  max_power_bhp
+	  max_power_rpm
+	  line {
 		printf("Nombre del coche: %s\n", car.name_car);
     	printf("Tipo de combustible: %s\n", car.fuel_type);
     	printf("Cilindrada: %d\n", car.engine_displacement);
