@@ -2,10 +2,12 @@ FUENTE = proyecto
 FUENTE_ONLY_FLEX = proyecto
 
 ADD_TEST = ../test/add_test.csv
+DEL_TEST = ../test/del_test.csv
+STATS_TEST = ../test/stat_test.csv
 
 LIB = lfl
 
-all: compile run1 clean
+all: compile run1 run2 run3
 
 compile:
 	flex $(FUENTE).l
@@ -14,7 +16,15 @@ compile:
 
 run1:
 	@echo "Ejecución de la prueba para añadir vehículos:"
-	@./$(FUENTE) < $(PRUEBA)
+	@./$(FUENTE) < $(ADD_TEST)
+
+run2:
+	@echo "Ejecución de la prueba para eliminar vehículos:"
+	@./$(FUENTE) < $(DEL_TEST)
+
+run3:
+	@echo "Ejecución de la prueba para estadísticas:"
+	@./$(FUENTE) < $(STATS_TEST)
 
 clean:
 	rm $(FUENTE) lex.yy.c $(FUENTE).tab.c $(FUENTE).tab.h
