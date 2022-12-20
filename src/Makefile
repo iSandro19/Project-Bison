@@ -5,7 +5,7 @@ PRUEBA = ../test/test.csv
 
 LIB = lfl
 
-all: compile run
+all: compile run clean
 
 compile:
 	flex $(FUENTE).l
