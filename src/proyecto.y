@@ -5,11 +5,9 @@
 
 /*
  * To-do:
- * - Complicar la entrada para aumentar la complejidad del parser/bison.
- * - Añadir una simulación de base de datos con structs de structs.
- * - Función para acceder a datos y estadísticas.
+ * - Función para acceder a datos.
  * - Entradas para modificación/consulta de datos.
- * - Tratamentos de erros!
+ * - Tratamiento de errores.
  */
 
 // Definición de la estructura
