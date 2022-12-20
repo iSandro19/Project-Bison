@@ -71,11 +71,32 @@
 
 #include <stdio.h>
 #include <string.h>
+#include <stdlib.h>
+
+struct car {
+    char *name_car;
+    char *fuel_type;
+    int engine_displacement;
+    int number_cylinder;
+    float seating_capacity;
+    char *transmission_type;
+    float fuel_tank_capacity;
+    char *body_type;
+    float rating;
+    int starting_price;
+    int ending_price;
+    float max_torque_nm;
+    int max_torque_rpm;
+    float max_power_bhp;
+    int max_power_rpm;
+};
+
+struct car car;
 
 void yyerror(char *s);
 char buffer[1024];
 
-#line 79 "proyecto.tab.c"
+#line 100 "proyecto.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -513,10 +534,10 @@ static const yytype_int8 yytranslate[] =
 
 #if YYDEBUG
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
-static const yytype_uint8 yyrline[] =
+static const yytype_int8 yyrline[] =
 {
-       0,    20,    20,    25,    26,    31,    38,    45,    52,    59,
-      66,    73,    80,    87,    94,   101,   108,   115,   122,   129
+       0,    41,    41,    46,    47,    66,    68,    70,    72,    74,
+      76,    78,    80,    82,    84,    86,    88,    90,    92,    94
 };
 #endif
 
@@ -1099,157 +1120,127 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* file: line  */
-#line 20 "proyecto.y"
+#line 41 "proyecto.y"
            {
-		printf("FINAL DE ARCHIVO \n");
+		printf("Final del archivo \n");
 	}
-#line 1107 "proyecto.tab.c"
+#line 1128 "proyecto.tab.c"
     break;
 
   case 4: /* line: name_car fuel_type engine_displacement number_cylinder seating_capacity transmission_type fuel_tank_capacity body_type rating starting_price ending_price max_torque_nm max_torque_rpm max_power_bhp max_power_rpm line  */
-#line 26 "proyecto.y"
+#line 47 "proyecto.y"
                                                                                                                                                                                                                                   {
-	}
-#line 1114 "proyecto.tab.c"
-    break;
-
-  case 5: /* name_car: STRING COMMA  */
-#line 31 "proyecto.y"
-                     {
-		char * str = (yyvsp[-1].val);
-		printf("Nombre del coche: %s\n", str);
-	}
-#line 1123 "proyecto.tab.c"
-    break;
-
-  case 6: /* fuel_type: STRING COMMA  */
-#line 38 "proyecto.y"
-                     {
-		char * str = (yyvsp[-1].val);
-		printf("Tipo de combustible: %s\n", str);
-	}
-#line 1132 "proyecto.tab.c"
-    break;
-
-  case 7: /* engine_displacement: INT COMMA  */
-#line 45 "proyecto.y"
-                  {
-		char * str = (yyvsp[-1].val);
-		printf("Cilindrada: %s\n", str);
-	}
-#line 1141 "proyecto.tab.c"
-    break;
-
-  case 8: /* number_cylinder: INT COMMA  */
-#line 52 "proyecto.y"
-                  {
-		char * str = (yyvsp[-1].val);
-		printf("Número de cilindros: %s\n", str);
+		printf("Nombre del coche: %s\n", car.name_car);
+    	printf("Tipo de combustible: %s\n", car.fuel_type);
+    	printf("Cilindrada: %d\n", car.engine_displacement);
+    	printf("Número de cilindros: %d\n", car.number_cylinder);
+    	printf("Capacidad de asientos: %f\n", car.seating_capacity);
+    	printf("Tipo de transmisión: %s\n", car.transmission_type);
+    	printf("Capacidad del depósito de combustible: %f\n", car.fuel_tank_capacity);
+    	printf("Tipo de carrocería: %s\n", car.body_type);
+    	printf("Puntuación: %f\n", car.rating);
+    	printf("Precio de inicio: %d\n", car.starting_price);
+    	printf("Precio final: %d\n", car.ending_price);
+    	printf("Par máximo (Nm): %f\n", car.max_torque_nm);
+    	printf("Par máximo (rpm): %d\n", car.max_torque_rpm);
+    	printf("Potencia máxima (bhp): %f\n", car.max_power_bhp);
+    	printf("Potencia máxima (rpm): %d\n\n", car.max_power_rpm);
 	}
 #line 1150 "proyecto.tab.c"
     break;
 
-  case 9: /* seating_capacity: FLOAT COMMA  */
-#line 59 "proyecto.y"
-                    {
-		char * str = (yyvsp[-1].val);
-		printf("Capacidad de asientos: %s\n", str);
-	}
-#line 1159 "proyecto.tab.c"
+  case 5: /* name_car: STRING COMMA  */
+#line 66 "proyecto.y"
+                       {car.name_car = (yyvsp[-1].val);}
+#line 1156 "proyecto.tab.c"
     break;
 
-  case 10: /* transmission_type: STRING COMMA  */
-#line 66 "proyecto.y"
-                     {
-		char * str = (yyvsp[-1].val);
-		printf("Tipo de transmisión: %s\n", str);
-	}
+  case 6: /* fuel_type: STRING COMMA  */
+#line 68 "proyecto.y"
+                        {car.fuel_type = (yyvsp[-1].val);}
+#line 1162 "proyecto.tab.c"
+    break;
+
+  case 7: /* engine_displacement: INT COMMA  */
+#line 70 "proyecto.y"
+                               {car.engine_displacement = atoi((yyvsp[-1].val));}
 #line 1168 "proyecto.tab.c"
     break;
 
+  case 8: /* number_cylinder: INT COMMA  */
+#line 72 "proyecto.y"
+                           {car.number_cylinder = atoi((yyvsp[-1].val));}
+#line 1174 "proyecto.tab.c"
+    break;
+
+  case 9: /* seating_capacity: FLOAT COMMA  */
+#line 74 "proyecto.y"
+                              {car.seating_capacity = atof((yyvsp[-1].val));}
+#line 1180 "proyecto.tab.c"
+    break;
+
+  case 10: /* transmission_type: STRING COMMA  */
+#line 76 "proyecto.y"
+                                {car.transmission_type = (yyvsp[-1].val);}
+#line 1186 "proyecto.tab.c"
+    break;
+
   case 11: /* fuel_tank_capacity: FLOAT COMMA  */
-#line 73 "proyecto.y"
-                    {
-		char * str = (yyvsp[-1].val);
-		printf("Capacidad del depósito de combustible: %s\n", str);
-	}
-#line 1177 "proyecto.tab.c"
+#line 78 "proyecto.y"
+                                {car.fuel_tank_capacity = atof((yyvsp[-1].val));}
+#line 1192 "proyecto.tab.c"
     break;
 
   case 12: /* body_type: STRING COMMA  */
 #line 80 "proyecto.y"
-                     {
-		char * str = (yyvsp[-1].val);
-		printf("Tipo de carrocería: %s\n", str);
-	}
-#line 1186 "proyecto.tab.c"
+                        {car.body_type = (yyvsp[-1].val);}
+#line 1198 "proyecto.tab.c"
     break;
 
   case 13: /* rating: FLOAT COMMA  */
-#line 87 "proyecto.y"
-                    {
-		char * str = (yyvsp[-1].val);
-		printf("Puntuación: %s\n", str);
-	}
-#line 1195 "proyecto.tab.c"
-    break;
-
-  case 14: /* starting_price: INT COMMA  */
-#line 94 "proyecto.y"
-                  {
-		char * str = (yyvsp[-1].val);
-		printf("Precio de inicio: %s\n", str);
-	}
+#line 82 "proyecto.y"
+                    {car.rating = atof((yyvsp[-1].val));}
 #line 1204 "proyecto.tab.c"
     break;
 
+  case 14: /* starting_price: INT COMMA  */
+#line 84 "proyecto.y"
+                          {car.starting_price = atoi((yyvsp[-1].val));}
+#line 1210 "proyecto.tab.c"
+    break;
+
   case 15: /* ending_price: INT COMMA  */
-#line 101 "proyecto.y"
-                  {
-		char * str = (yyvsp[-1].val);
-		printf("Precio final: %s\n", str);
-	}
-#line 1213 "proyecto.tab.c"
+#line 86 "proyecto.y"
+                        {car.ending_price = atoi((yyvsp[-1].val));}
+#line 1216 "proyecto.tab.c"
     break;
 
   case 16: /* max_torque_nm: FLOAT COMMA  */
-#line 108 "proyecto.y"
-                    {
-		char * str = (yyvsp[-1].val);
-		printf("Par máximo (Nm): %s\n", str);
-	}
+#line 88 "proyecto.y"
+                           {car.max_torque_nm = atof((yyvsp[-1].val));}
 #line 1222 "proyecto.tab.c"
     break;
 
   case 17: /* max_torque_rpm: INT COMMA  */
-#line 115 "proyecto.y"
-                  {
-		char * str = (yyvsp[-1].val);
-		printf("Par máximo (rpm): %s\n", str);
-	}
-#line 1231 "proyecto.tab.c"
+#line 90 "proyecto.y"
+                          {car.max_torque_rpm = atoi((yyvsp[-1].val));}
+#line 1228 "proyecto.tab.c"
     break;
 
   case 18: /* max_power_bhp: FLOAT COMMA  */
-#line 122 "proyecto.y"
-                    {
-		char * str = (yyvsp[-1].val);
-		printf("Potencia máxima (bhp): %s\n", str);
-	}
-#line 1240 "proyecto.tab.c"
+#line 92 "proyecto.y"
+                           {car.max_power_bhp = atof((yyvsp[-1].val));}
+#line 1234 "proyecto.tab.c"
     break;
 
   case 19: /* max_power_rpm: INT END  */
-#line 129 "proyecto.y"
-                {
-		char * str = (yyvsp[-1].val);
-		printf("Potencia máxima (rpm): %s\n\n", str);
-	}
-#line 1249 "proyecto.tab.c"
+#line 94 "proyecto.y"
+                       {car.max_power_rpm = atoi((yyvsp[-1].val));}
+#line 1240 "proyecto.tab.c"
     break;
 
 
-#line 1253 "proyecto.tab.c"
+#line 1244 "proyecto.tab.c"
 
       default: break;
     }
@@ -1442,7 +1433,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 135 "proyecto.y"
+#line 96 "proyecto.y"
 
 
 int main(int argc, char *argv[]) {
