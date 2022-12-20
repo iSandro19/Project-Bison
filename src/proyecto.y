@@ -23,6 +23,9 @@ struct car {
 
 struct car car;
 
+int num_cars = 0;
+int total_engine_displacement = 0;
+
 void yyerror(char *s);
 char buffer[1024];
 %}
