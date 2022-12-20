@@ -42,6 +42,7 @@ char buffer[1024];
 %union{
 	char * val;
 }
+%token <val> COMMAND
 %token <val> STRING
 %token <val> INT
 %token <val> FLOAT
@@ -55,22 +56,8 @@ file: line {
 	}
 ;
 
-line: /*vacio */
-  	| name_car 
-	  fuel_type
-	  engine_displacement
-	  number_cylinder
-	  seating_capacity
-	  transmission_type
-	  fuel_tank_capacity
-	  body_type rating
-	  starting_price
-	  ending_price
-	  max_torque_nm
-	  max_torque_rpm
-	  max_power_bhp
-	  max_power_rpm
-	  line {
+line: /* empty */
+	| command data {
 		printf("Nombre del coche: %s\n", car.name_car);
     	printf("Tipo de combustible: %s\n", car.fuel_type);
     	printf("Cilindrada: %d\n", car.engine_displacement);
@@ -87,6 +74,46 @@ line: /*vacio */
     	printf("Potencia máxima (bhp): %f\n", car.max_power_bhp);
     	printf("Potencia máxima (rpm): %d\n\n", car.max_power_rpm);
 	}
+;
+
+command: COMMAND {
+	if (strcmp($1, "ADD_CAR") == 0) {
+		printf("Añadiendo coche...\n");
+	}
+	else if (strcmp($1, "DEL_CAR") == 0) {
+		printf("Eliminando coche...\n");
+	}
+	else if (strcmp($1, "STATS") == 0) {
+		printf("Estadísticas...\n");
+	}
+	else if (strcmp($1, "HELP") == 0) {
+		printf("Operaciones disponibles:\n\tADD_CAR\n\tDEL_CAR\n\tSTATS\n\tSEARCH\n\tHELP\n\tEXIT\n");
+	}
+	else if (strcmp($1, "EXIT") == 0) {
+		printf("Saliendo...\n");
+		exit(0);
+	}
+	else {
+		printf("Comando no reconocido.\n");
+		printf("Operaciones disponibles:\n\tADD_CAR\n\tDEL_CAR\n\tSTATS\n\tSEARCH\n\tHELP\n\tEXIT\n");
+	}
+}
+
+data: /* empty */
+	| name_car 
+	  fuel_type
+	  engine_displacement
+	  number_cylinder
+	  seating_capacity
+	  transmission_type
+	  fuel_tank_capacity
+	  body_type rating
+	  starting_price
+	  ending_price
+	  max_torque_nm
+	  max_torque_rpm
+	  max_power_bhp
+	  max_power_rpm
 ;
 
 name_car: STRING COMMA {car.name_car = $1;};
