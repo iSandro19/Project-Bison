@@ -5,22 +5,17 @@
 
 %option yylineno
 
-cabecera "<?"[a-zA-Z0-9.\-=" ]+"?>"
-comentarios "<!--"[a-zA-Z0-9"\.=/:_,!áéíóú ]+"-->"
-fin "</"[a-zA-Z0-9:"=._\- ]+">"
-inicio "<"[a-zA-Z0-9:"=._\- ]+">"
-datos [^><\n\t\r ]+
-invalido [&<]+
+string [a-zA-Z ]+
+int [0-9]+
+float [0-9]+\.[0-9]+
+comma [, ]+
 
 %%
 
-{invalido} {return INVALIDO;}
-{cabecera} {return CABECERA;}
-{comentarios} {return COMENTARIOS;}
-{fin} {yylval.val = strdup(yytext+2); return FIN;}
-{inicio} {yylval.val = strdup(yytext+1); return INICIO;}
-{datos} {return DATOS;}
-\n {0;}
-" " {0;}
+{string} {yylval.val = strdup(yytext); return STRING;}
+{int} {yylval.val = strdup(yytext); return INT;}
+{float} {yylval.val = strdup(yytext); return FLOAT;}
+{comma} {return COMMA;}
+. {}
 
 %%

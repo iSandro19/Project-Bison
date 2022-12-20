@@ -1,9 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!-- Comprobamos que los tags estén bien agrupados -->
-<nota>
-    <a><b>1</a></b>
-    <autor>Yo</autor>
-    <titulo>PL. Importante</titulo>
-    <fecha>20/10/2022 15:00</fecha>
-    <descripcion>No olvidar las prácticas de PL!</descripcion>
-</nota>

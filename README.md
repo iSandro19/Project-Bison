@@ -4,28 +4,39 @@
 
 Óscar Alejandro Manteiga Seoane y Antonio Vila Leis
 
+## Descripción
+
+El objetivo de este proyecto es el parseo y procesado de datos de ficheros de entrada. Estos ficheros tendrán datos e información sobre vehículos, que serán recogidos para cargarlos en memoria. Esto lo haremos con un struct en C para poder acceder a ellos de forma cómoda y realizar estadísticas sobre los datos.
+
+## Ficheros de entrada
+
+Los ficheros de entrada tendrán la siguiente estructura por cada línea:
+
+```txt
+car_name, fuel_type, engine_displacement, number_cylinder, seating_capacity, transmission_type, fuel_tank_capacity, body_type, rating, starting_price, ending_price, max_torque_nm, max_torque_rpm, max_power_bhp, max_power_rp
+```
+
+Como se puede ver, por cada línea tendremos el nombre de la marca y modelo del vehículo, la cilindrada, número de cilindos... Como se ha mecionado ya, estos datos serán parseados y guardados en memoria para poder realizar operaciones sobre los datos.
+
 ## Desarrollo, funcionamiento y peculiaridades
 
 ### Desarrollo en 3 etapas
 
-La primera de ellas será la composición del archivo flex de la práctica. En esta parte se edita el fichero practica2.l para lograr que se identifiquen todos los elementos del XML. Para saber si iba detectando todo, se realizaba un printf() con el tipo de elemento que era (cabecera, comentario, inicio, fin, datos...). Esto ayudo a completar el archivo con todas las posibilidades que puede contener un XML. Al finalizarlo se cambiaron los printf() por un return con esa misma palabra, que la usaremos en la gramática.
+La primera de ellas será la composición del archivo flex de la práctica. En esta parte se edita el fichero proyecto.l para lograr que se identifiquen todos los elementos del .csv.
 
-La segunda parte de la prácticas será la composición del archivo bison/yacc de la práctica correspondiente a la gramática. En esta parte se edita el fichero practica2.y. En una libreta se fue desarrollando el árbol de la gramática para poder escribir todas las opciones en fichero. Una vez desarrollado las opciones válidas se pasó a escribir los fallos que se pueden realizar en la gramática de un XML para formatear el mensaje de error.
-
-La última fase (aunque se fue desarrollando a la vez que las dos anteriores) fue el desarrollo de los test, que en este caso son 10. 9 de ellos buscan un fallo en concreto en el XML que se le pase (mencionado al hacer make all o make runX) y 1 que comprueba un archivo largo que no tiene ningún fallo (para saber si los que están bien los marca como tal).
+La segunda parte de la prácticas será la composición del archivo bison/yacc de la práctica correspondiente a la gramática. En esta parte se edita el fichero proyecto.y.
 
 ### Funcionamiento
 
-Con el programa en FLEX detectamos todos los caracteres de una cadena de texto o fichero, que se pasan a BISON para que comprobemos con nuestras reglas si coincide con cómo tienen que ser un XML. En caso de que no sea así mostraremos un mensaje de error.
-Para ejecutarla basta con ejecutar `make all` (compilará y ejecutará los 10 tests con el mensaje explictivo de cada uno) o `make compile` y `make runX` (siendo X el número de test).
+Con el programa en FLEX detectamos todos los caracteres de una cadena de texto o fichero, que se pasan a BISON para que comprobemos con nuestras reglas si coincide con cómo tienen que ser un XML. En caso de que no sea así mostraremos un mensaje de error. Para ejecutarla basta con ejecutar `make all` (compilará y ejecutará los 10 tests con el mensaje explictivo de cada uno) o `make compile` y `make runX` (siendo X el número de test).
 
 ### Contenido
 
-- practica2.l: programa en flex.
-- practica2.y: programa en bison.
-- practica2.txt: memoria (este archivo).
+- proyecto.l: programa en flex.
+- proyecto.y: programa en bison.
+- README.md: memoria (este archivo).
 - Makefile: archivo para compilar el programa y ejecutarlo
-- testX.xml: archivos XML para testear el programa.
+- test.csv: archivos XML para testear el programa.
 
 ---
 
