@@ -12,6 +12,7 @@
  * - Tratamentos de erros!
  */
 
+// Definición de la estructura
 struct car {
     char *name_car;
     char *fuel_type;
@@ -30,13 +31,44 @@ struct car {
     int max_power_rpm;
 };
 
+// Vector de estructuras que simula la BBDD y una estructura temporal
+struct car cars[500];
 struct car car;
 
+// Variables para guardar estadísticas globales
 int num_cars = 0;
 int total_engine_displacement = 0;
 
+// Variables para gestión de errores
 void yyerror(char *s);
 char buffer[1024];
+
+// Función de print
+void show(int i) {
+		printf("Nombre del coche: %s\n", cars[i].name_car);
+		printf("Tipo de combustible: %s\n", cars[i].fuel_type);
+		printf("Cilindrada: %d\n", cars[i].engine_displacement);
+		printf("Número de cilindros: %d\n", cars[i].number_cylinder);
+		printf("Capacidad de asientos: %f\n", cars[i].seating_capacity);
+		printf("Tipo de transmisión: %s\n", cars[i].transmission_type);
+		printf("Capacidad del depósito de combustible: %f\n", cars[i].fuel_tank_capacity);
+		printf("Tipo de carrocería: %s\n", cars[i].body_type);
+		printf("Puntuación: %f\n", cars[i].rating);
+		printf("Precio de inicio: %d\n", cars[i].starting_price);
+		printf("Precio final: %d\n", cars[i].ending_price);
+		printf("Par máximo (Nm): %f\n", cars[i].max_torque_nm);
+		printf("Par máximo (rpm): %d\n", cars[i].max_torque_rpm);
+		printf("Potencia máxima (bhp): %f\n", cars[i].max_power_bhp);
+		printf("Potencia máxima (rpm): %d\n", cars[i].max_power_rpm);
+}
+
+// Función para mostrar todos los datos
+void show_all() {
+	for(int i = 0; i < num_cars; i++) {
+		show(i);
+	}
+}
+
 %}
 
 %union{
@@ -57,47 +89,35 @@ file: line {
 ;
 
 line: /* empty */
-	| command data {
-		printf("Nombre del coche: %s\n", car.name_car);
-    	printf("Tipo de combustible: %s\n", car.fuel_type);
-    	printf("Cilindrada: %d\n", car.engine_displacement);
-    	printf("Número de cilindros: %d\n", car.number_cylinder);
-    	printf("Capacidad de asientos: %f\n", car.seating_capacity);
-    	printf("Tipo de transmisión: %s\n", car.transmission_type);
-    	printf("Capacidad del depósito de combustible: %f\n", car.fuel_tank_capacity);
-    	printf("Tipo de carrocería: %s\n", car.body_type);
-    	printf("Puntuación: %f\n", car.rating);
-    	printf("Precio de inicio: %d\n", car.starting_price);
-    	printf("Precio final: %d\n", car.ending_price);
-    	printf("Par máximo (Nm): %f\n", car.max_torque_nm);
-    	printf("Par máximo (rpm): %d\n", car.max_torque_rpm);
-    	printf("Potencia máxima (bhp): %f\n", car.max_power_bhp);
-    	printf("Potencia máxima (rpm): %d\n\n", car.max_power_rpm);
+	| COMMAND data line {
+		if (strcmp($1, "ADD_CAR") == 0) {
+			printf("Añadiendo coche...\n");
+			cars[num_cars] = car;
+			show(num_cars);
+			num_cars++;
+		}
+		else if (strcmp($1, "DEL_CAR") == 0) {
+			printf("Eliminando coche...\n");
+			show(num_cars);
+		}
+		else if (strcmp($1, "STATS") == 0) {
+			printf("Estadísticas...\n");
+		}
+		else if (strcmp($1, "HELP") == 0) {
+			printf("Operaciones disponibles:\n\tADD_CAR\n\tDEL_CAR\n\tSTATS\n\tSEARCH\n\tHELP\n\tEXIT\n");
+		}
+		else if (strcmp($1, "SHOW_ALL") == 0) {
+			show_all();
+		}
+		else if(strcmp($1, "EXIT") == 0) {
+
+		}
+		else {
+			printf("Comando no reconocido.\n");
+			printf("Operaciones disponibles:\n\tADD_CAR\n\tDEL_CAR\n\tSTATS\n\tSEARCH\n\tHELP\n\tEXIT\n");
+		}
 	}
 ;
-
-command: COMMAND {
-	if (strcmp($1, "ADD_CAR") == 0) {
-		printf("Añadiendo coche...\n");
-	}
-	else if (strcmp($1, "DEL_CAR") == 0) {
-		printf("Eliminando coche...\n");
-	}
-	else if (strcmp($1, "STATS") == 0) {
-		printf("Estadísticas...\n");
-	}
-	else if (strcmp($1, "HELP") == 0) {
-		printf("Operaciones disponibles:\n\tADD_CAR\n\tDEL_CAR\n\tSTATS\n\tSEARCH\n\tHELP\n\tEXIT\n");
-	}
-	else if (strcmp($1, "EXIT") == 0) {
-		printf("Saliendo...\n");
-		exit(0);
-	}
-	else {
-		printf("Comando no reconocido.\n");
-		printf("Operaciones disponibles:\n\tADD_CAR\n\tDEL_CAR\n\tSTATS\n\tSEARCH\n\tHELP\n\tEXIT\n");
-	}
-}
 
 data: /* empty */
 	| name_car 
@@ -113,37 +133,23 @@ data: /* empty */
 	  max_torque_nm
 	  max_torque_rpm
 	  max_power_bhp
-	  max_power_rpm
+	  max_power_rpm {num_cars++;}
 ;
 
 name_car: STRING COMMA {car.name_car = $1;};
-
 fuel_type: STRING COMMA {car.fuel_type = $1;};
-
 engine_displacement: INT COMMA {car.engine_displacement = atoi($1);};
-
 number_cylinder: INT COMMA {car.number_cylinder = atoi($1);};
-
 seating_capacity: FLOAT COMMA {car.seating_capacity = atof($1);};
-
 transmission_type: STRING COMMA {car.transmission_type = $1;};
-
 fuel_tank_capacity: FLOAT COMMA {car.fuel_tank_capacity = atof($1);};
-
 body_type: STRING COMMA {car.body_type = $1;} ;
-
 rating: FLOAT COMMA {car.rating = atof($1);};
-
 starting_price: INT COMMA {car.starting_price = atoi($1);};
-
 ending_price: INT COMMA {car.ending_price = atoi($1);};
-
 max_torque_nm: FLOAT COMMA {car.max_torque_nm = atof($1);};
-
 max_torque_rpm: INT COMMA {car.max_torque_rpm = atoi($1);};
-
 max_power_bhp: FLOAT COMMA {car.max_power_bhp = atof($1);};
-
 max_power_rpm: INT END {car.max_power_rpm = atoi($1);};
 
 %%

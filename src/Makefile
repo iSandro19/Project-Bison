@@ -1,19 +1,19 @@
 FUENTE = proyecto
 FUENTE_ONLY_FLEX = proyecto
 
-PRUEBA = ../test/test.csv
+ADD_TEST = ../test/add_test.csv
 
 LIB = lfl
 
-all: compile run clean
+all: compile run1 clean
 
 compile:
 	flex $(FUENTE).l
 	bison -o $(FUENTE).tab.c $(FUENTE).y -yd
 	gcc -o $(FUENTE) lex.yy.c $(FUENTE).tab.c -$(LIB)
 
-run:
-	@echo "Ejecución:"
+run1:
+	@echo "Ejecución de la prueba para añadir vehículos:"
 	@./$(FUENTE) < $(PRUEBA)
 
 clean:
