@@ -3,6 +3,14 @@
 #include <string.h>
 #include <stdlib.h>
 
+/*
+ * To-do:
+ * - Complicar la entrada para aumentar la complejidad del parser/bison.
+ * - Añadir una simulación de base de datos con structs de structs.
+ * - Función para acceder a datos y estadísticas.
+ * - Entradas para modificación/consulta de datos.
+ */
+
 struct car {
     char *name_car;
     char *fuel_type;
