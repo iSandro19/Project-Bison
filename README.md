@@ -1,4 +1,8 @@
-# Practical-Bison | Óscar Alejandro Manteiga Seoane
+# Project-Bison
+
+## Autores
+
+Óscar Alejandro Manteiga Seoane y Antonio Vila Leis
 
 ## Desarrollo, funcionamiento y peculiaridades
 
@@ -25,4 +29,4 @@ Para ejecutarla basta con ejecutar `make all` (compilará y ejecutará los 10 te
 
 ---
 
-Óscar Alejandro Manteiga Seoane | PL 2022/2023
+Antonio Vila Leis | Óscar Alejandro Manteiga Seoane | PL 2022/2023
