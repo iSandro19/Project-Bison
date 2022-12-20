@@ -110,8 +110,25 @@ enum yysymbol_kind_t
   YYSYMBOL_INT = 4,                        /* INT  */
   YYSYMBOL_FLOAT = 5,                      /* FLOAT  */
   YYSYMBOL_COMMA = 6,                      /* COMMA  */
-  YYSYMBOL_YYACCEPT = 7,                   /* $accept  */
-  YYSYMBOL_line = 8                        /* line  */
+  YYSYMBOL_END = 7,                        /* END  */
+  YYSYMBOL_YYACCEPT = 8,                   /* $accept  */
+  YYSYMBOL_file = 9,                       /* file  */
+  YYSYMBOL_line = 10,                      /* line  */
+  YYSYMBOL_name_car = 11,                  /* name_car  */
+  YYSYMBOL_fuel_type = 12,                 /* fuel_type  */
+  YYSYMBOL_engine_displacement = 13,       /* engine_displacement  */
+  YYSYMBOL_number_cylinder = 14,           /* number_cylinder  */
+  YYSYMBOL_seating_capacity = 15,          /* seating_capacity  */
+  YYSYMBOL_transmission_type = 16,         /* transmission_type  */
+  YYSYMBOL_fuel_tank_capacity = 17,        /* fuel_tank_capacity  */
+  YYSYMBOL_body_type = 18,                 /* body_type  */
+  YYSYMBOL_rating = 19,                    /* rating  */
+  YYSYMBOL_starting_price = 20,            /* starting_price  */
+  YYSYMBOL_ending_price = 21,              /* ending_price  */
+  YYSYMBOL_max_torque_nm = 22,             /* max_torque_nm  */
+  YYSYMBOL_max_torque_rpm = 23,            /* max_torque_rpm  */
+  YYSYMBOL_max_power_bhp = 24,             /* max_power_bhp  */
+  YYSYMBOL_max_power_rpm = 25              /* max_power_rpm  */
 };
 typedef enum yysymbol_kind_t yysymbol_kind_t;
 
@@ -437,21 +454,21 @@ union yyalloc
 #endif /* !YYCOPY_NEEDED */
 
 /* YYFINAL -- State number of the termination state.  */
-#define YYFINAL  4
+#define YYFINAL  6
 /* YYLAST -- Last index in YYTABLE.  */
-#define YYLAST   52
+#define YYLAST   33
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  7
+#define YYNTOKENS  8
 /* YYNNTS -- Number of nonterminals.  */
-#define YYNNTS  2
+#define YYNNTS  18
 /* YYNRULES -- Number of rules.  */
-#define YYNRULES  3
+#define YYNRULES  19
 /* YYNSTATES -- Number of states.  */
-#define YYNSTATES  45
+#define YYNSTATES  50
 
 /* YYMAXUTOK -- Last valid token kind.  */
-#define YYMAXUTOK   261
+#define YYMAXUTOK   262
 
 
 /* YYTRANSLATE(TOKEN-NUM) -- Symbol number corresponding to TOKEN-NUM
@@ -491,14 +508,15 @@ static const yytype_int8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     2,     2,     2,     2,
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
-       5,     6
+       5,     6,     7
 };
 
 #if YYDEBUG
 /* YYRLINE[YYN] -- Source line where rule number YYN was defined.  */
-static const yytype_int8 yyrline[] =
+static const yytype_uint8 yyrline[] =
 {
-       0,    20,    20,    22
+       0,    20,    20,    25,    26,    31,    38,    45,    52,    59,
+      66,    73,    80,    87,    94,   101,   108,   115,   122,   129
 };
 #endif
 
@@ -515,7 +533,11 @@ static const char *yysymbol_name (yysymbol_kind_t yysymbol) YY_ATTRIBUTE_UNUSED;
 static const char *const yytname[] =
 {
   "\"end of file\"", "error", "\"invalid token\"", "STRING", "INT",
-  "FLOAT", "COMMA", "$accept", "line", YY_NULLPTR
+  "FLOAT", "COMMA", "END", "$accept", "file", "line", "name_car",
+  "fuel_type", "engine_displacement", "number_cylinder",
+  "seating_capacity", "transmission_type", "fuel_tank_capacity",
+  "body_type", "rating", "starting_price", "ending_price", "max_torque_nm",
+  "max_torque_rpm", "max_power_bhp", "max_power_rpm", YY_NULLPTR
 };
 
 static const char *
@@ -525,7 +547,7 @@ yysymbol_name (yysymbol_kind_t yysymbol)
 }
 #endif
 
-#define YYPACT_NINF (-5)
+#define YYPACT_NINF (-41)
 
 #define yypact_value_is_default(Yyn) \
   ((Yyn) == YYPACT_NINF)
@@ -539,11 +561,11 @@ yysymbol_name (yysymbol_kind_t yysymbol)
    STATE-NUM.  */
 static const yytype_int8 yypact[] =
 {
-      -1,    -3,     4,     2,    -5,     0,     3,     5,     6,     7,
-       9,    10,    12,    11,    13,    14,    16,    15,    17,    18,
-       8,    19,    22,    21,    -4,    23,    24,    27,    28,    29,
-      30,    32,    33,    34,    35,    38,    39,    40,    41,    43,
-      -5,    44,    45,    46,    -5
+      -3,    -5,     2,   -41,     0,   -41,   -41,    -2,     1,   -41,
+       3,     4,   -41,     5,     7,   -41,     8,    10,   -41,     9,
+      11,   -41,    12,    14,   -41,    13,    15,   -41,    16,     6,
+     -41,    17,    20,   -41,    19,    21,   -41,    22,    23,   -41,
+      24,    26,   -41,    27,    25,   -41,    -1,    -3,   -41,   -41
 };
 
 /* YYDEFACT[STATE-NUM] -- Default reduction number in state STATE-NUM.
@@ -551,23 +573,25 @@ static const yytype_int8 yypact[] =
    means the default is an error.  */
 static const yytype_int8 yydefact[] =
 {
-       0,     0,     0,     0,     1,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       0,     0,     0,     0,     0,     0,     0,     0,     0,     0,
-       2,     0,     0,     0,     3
+       3,     0,     0,     2,     0,     5,     1,     0,     0,     6,
+       0,     0,     7,     0,     0,     8,     0,     0,     9,     0,
+       0,    10,     0,     0,    11,     0,     0,    12,     0,     0,
+      13,     0,     0,    14,     0,     0,    15,     0,     0,    16,
+       0,     0,    17,     0,     0,    18,     0,     3,    19,     4
 };
 
 /* YYPGOTO[NTERM-NUM].  */
 static const yytype_int8 yypgoto[] =
 {
-      -5,    -5
+     -41,   -41,   -40,   -41,   -41,   -41,   -41,   -41,   -41,   -41,
+     -41,   -41,   -41,   -41,   -41,   -41,   -41,   -41
 };
 
 /* YYDEFGOTO[NTERM-NUM].  */
 static const yytype_int8 yydefgoto[] =
 {
-       0,     2
+       0,     2,     3,     4,     8,    11,    14,    17,    20,    23,
+      26,    29,    32,    35,    38,    41,    44,    47
 };
 
 /* YYTABLE[YYPACT[STATE-NUM]] -- What to do in state STATE-NUM.  If
@@ -575,45 +599,43 @@ static const yytype_int8 yydefgoto[] =
    number is the opposite.  If YYTABLE_NINF, syntax error.  */
 static const yytype_int8 yytable[] =
 {
-      25,    26,     1,     3,     4,     5,     6,     7,     0,     0,
-       9,     8,    21,    10,    11,    13,    12,    14,    15,    17,
-      16,    18,    19,     0,    20,    22,    23,    24,     0,    27,
-      28,    29,    30,     0,     0,    31,    32,    33,    34,     0,
-      35,    36,    37,    38,     0,     0,    39,    40,    41,    43,
-      42,     0,    44
+       1,     5,     6,     7,     9,    10,    48,    49,    13,    12,
+      31,    15,    16,    19,    18,    21,    22,    25,    24,    27,
+      28,     0,    30,    33,    34,    36,    37,    40,    39,    46,
+      42,    43,     0,    45
 };
 
 static const yytype_int8 yycheck[] =
 {
-       4,     5,     3,     6,     0,     3,     6,     4,    -1,    -1,
-       4,     6,     4,     6,     5,     3,     6,     6,     5,     3,
-       6,     6,     5,    -1,     6,     6,     4,     6,    -1,     6,
-       6,     4,     4,    -1,    -1,     6,     6,     5,     5,    -1,
-       6,     6,     4,     4,    -1,    -1,     6,     6,     5,     4,
-       6,    -1,     6
+       3,     6,     0,     3,     6,     4,     7,    47,     4,     6,
+       4,     6,     5,     3,     6,     6,     5,     3,     6,     6,
+       5,    -1,     6,     6,     4,     6,     5,     4,     6,     4,
+       6,     5,    -1,     6
 };
 
 /* YYSTOS[STATE-NUM] -- The symbol kind of the accessing symbol of
    state STATE-NUM.  */
 static const yytype_int8 yystos[] =
 {
-       0,     3,     8,     6,     0,     3,     6,     4,     6,     4,
-       6,     5,     6,     3,     6,     5,     6,     3,     6,     5,
-       6,     4,     6,     4,     6,     4,     5,     6,     6,     4,
-       4,     6,     6,     5,     5,     6,     6,     4,     4,     6,
-       6,     5,     6,     4,     6
+       0,     3,     9,    10,    11,     6,     0,     3,    12,     6,
+       4,    13,     6,     4,    14,     6,     5,    15,     6,     3,
+      16,     6,     5,    17,     6,     3,    18,     6,     5,    19,
+       6,     4,    20,     6,     4,    21,     6,     5,    22,     6,
+       4,    23,     6,     5,    24,     6,     4,    25,     7,    10
 };
 
 /* YYR1[RULE-NUM] -- Symbol kind of the left-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr1[] =
 {
-       0,     7,     8,     8
+       0,     8,     9,    10,    10,    11,    12,    13,    14,    15,
+      16,    17,    18,    19,    20,    21,    22,    23,    24,    25
 };
 
 /* YYR2[RULE-NUM] -- Number of symbols on the right-hand side of rule RULE-NUM.  */
 static const yytype_int8 yyr2[] =
 {
-       0,     2,    30,    34
+       0,     2,     1,     0,    16,     2,     2,     2,     2,     2,
+       2,     2,     2,     2,     2,     2,     2,     2,     2,     2
 };
 
 
@@ -1076,20 +1098,158 @@ yyreduce:
   YY_REDUCE_PRINT (yyn);
   switch (yyn)
     {
-  case 2: /* line: STRING COMMA STRING COMMA INT COMMA INT COMMA FLOAT COMMA STRING COMMA FLOAT COMMA STRING COMMA FLOAT COMMA INT COMMA INT COMMA FLOAT COMMA INT COMMA FLOAT COMMA INT COMMA  */
-#line 21 "proyecto.y"
-    {printf("Sintaxis XML correcta (1).\n\n");}
-#line 1083 "proyecto.tab.c"
+  case 2: /* file: line  */
+#line 20 "proyecto.y"
+           {
+		printf("FINAL DE ARCHIVO \n");
+	}
+#line 1107 "proyecto.tab.c"
     break;
 
-  case 3: /* line: STRING COMMA STRING COMMA INT COMMA INT COMMA FLOAT COMMA STRING COMMA FLOAT COMMA STRING COMMA FLOAT COMMA INT COMMA INT COMMA INT COMMA INT COMMA FLOAT COMMA INT COMMA FLOAT COMMA INT COMMA  */
-#line 23 "proyecto.y"
-    {printf("Sintaxis XML correcta (2).\n\n");}
-#line 1089 "proyecto.tab.c"
+  case 4: /* line: name_car fuel_type engine_displacement number_cylinder seating_capacity transmission_type fuel_tank_capacity body_type rating starting_price ending_price max_torque_nm max_torque_rpm max_power_bhp max_power_rpm line  */
+#line 26 "proyecto.y"
+                                                                                                                                                                                                                                  {
+	}
+#line 1114 "proyecto.tab.c"
+    break;
+
+  case 5: /* name_car: STRING COMMA  */
+#line 31 "proyecto.y"
+                     {
+		char * str = (yyvsp[-1].val);
+		printf("Nombre del coche: %s\n", str);
+	}
+#line 1123 "proyecto.tab.c"
+    break;
+
+  case 6: /* fuel_type: STRING COMMA  */
+#line 38 "proyecto.y"
+                     {
+		char * str = (yyvsp[-1].val);
+		printf("Tipo de combustible: %s\n", str);
+	}
+#line 1132 "proyecto.tab.c"
+    break;
+
+  case 7: /* engine_displacement: INT COMMA  */
+#line 45 "proyecto.y"
+                  {
+		char * str = (yyvsp[-1].val);
+		printf("Cilindrada: %s\n", str);
+	}
+#line 1141 "proyecto.tab.c"
+    break;
+
+  case 8: /* number_cylinder: INT COMMA  */
+#line 52 "proyecto.y"
+                  {
+		char * str = (yyvsp[-1].val);
+		printf("Número de cilindros: %s\n", str);
+	}
+#line 1150 "proyecto.tab.c"
+    break;
+
+  case 9: /* seating_capacity: FLOAT COMMA  */
+#line 59 "proyecto.y"
+                    {
+		char * str = (yyvsp[-1].val);
+		printf("Capacidad de asientos: %s\n", str);
+	}
+#line 1159 "proyecto.tab.c"
+    break;
+
+  case 10: /* transmission_type: STRING COMMA  */
+#line 66 "proyecto.y"
+                     {
+		char * str = (yyvsp[-1].val);
+		printf("Tipo de transmisión: %s\n", str);
+	}
+#line 1168 "proyecto.tab.c"
+    break;
+
+  case 11: /* fuel_tank_capacity: FLOAT COMMA  */
+#line 73 "proyecto.y"
+                    {
+		char * str = (yyvsp[-1].val);
+		printf("Capacidad del depósito de combustible: %s\n", str);
+	}
+#line 1177 "proyecto.tab.c"
+    break;
+
+  case 12: /* body_type: STRING COMMA  */
+#line 80 "proyecto.y"
+                     {
+		char * str = (yyvsp[-1].val);
+		printf("Tipo de carrocería: %s\n", str);
+	}
+#line 1186 "proyecto.tab.c"
+    break;
+
+  case 13: /* rating: FLOAT COMMA  */
+#line 87 "proyecto.y"
+                    {
+		char * str = (yyvsp[-1].val);
+		printf("Puntuación: %s\n", str);
+	}
+#line 1195 "proyecto.tab.c"
+    break;
+
+  case 14: /* starting_price: INT COMMA  */
+#line 94 "proyecto.y"
+                  {
+		char * str = (yyvsp[-1].val);
+		printf("Precio de inicio: %s\n", str);
+	}
+#line 1204 "proyecto.tab.c"
+    break;
+
+  case 15: /* ending_price: INT COMMA  */
+#line 101 "proyecto.y"
+                  {
+		char * str = (yyvsp[-1].val);
+		printf("Precio final: %s\n", str);
+	}
+#line 1213 "proyecto.tab.c"
+    break;
+
+  case 16: /* max_torque_nm: FLOAT COMMA  */
+#line 108 "proyecto.y"
+                    {
+		char * str = (yyvsp[-1].val);
+		printf("Par máximo (Nm): %s\n", str);
+	}
+#line 1222 "proyecto.tab.c"
+    break;
+
+  case 17: /* max_torque_rpm: INT COMMA  */
+#line 115 "proyecto.y"
+                  {
+		char * str = (yyvsp[-1].val);
+		printf("Par máximo (rpm): %s\n", str);
+	}
+#line 1231 "proyecto.tab.c"
+    break;
+
+  case 18: /* max_power_bhp: FLOAT COMMA  */
+#line 122 "proyecto.y"
+                    {
+		char * str = (yyvsp[-1].val);
+		printf("Potencia máxima (bhp): %s\n", str);
+	}
+#line 1240 "proyecto.tab.c"
+    break;
+
+  case 19: /* max_power_rpm: INT END  */
+#line 129 "proyecto.y"
+                {
+		char * str = (yyvsp[-1].val);
+		printf("Potencia máxima (rpm): %s\n\n", str);
+	}
+#line 1249 "proyecto.tab.c"
     break;
 
 
-#line 1093 "proyecto.tab.c"
+#line 1253 "proyecto.tab.c"
 
       default: break;
     }
@@ -1282,7 +1442,7 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 26 "proyecto.y"
+#line 135 "proyecto.y"
 
 
 int main(int argc, char *argv[]) {
@@ -1300,11 +1460,11 @@ extern FILE *yyin;
 				fclose(yyin);
 			}
 			break;
-		default: printf("ERROR: Demasiados argumentos.\nSintaxis: %s [fichero_entrada]\n\n", argv[0]);
+		default: printf("ERROR: Demasiados argumentos.\nSintaxis: %s\n [fichero_entrada]\n\n", argv[0]);
 	}
 
 	return 0;
 }
 
 extern int yylineno;
-void yyerror(char *s) {fprintf (stderr, "Sintaxis XML incorrecta en línea %d. %s\n\n", yylineno, s);}
+void yyerror(char *s) {fprintf (stderr, "Sintaxis incorrecta en línea %d: %s\n\n\n", yylineno, s);}

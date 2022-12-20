@@ -57,7 +57,8 @@ extern int yydebug;
     STRING = 258,                  /* STRING  */
     INT = 259,                     /* INT  */
     FLOAT = 260,                   /* FLOAT  */
-    COMMA = 261                    /* COMMA  */
+    COMMA = 261,                   /* COMMA  */
+    END = 262                      /* END  */
   };
   typedef enum yytokentype yytoken_kind_t;
 #endif
@@ -70,6 +71,7 @@ extern int yydebug;
 #define INT 259
 #define FLOAT 260
 #define COMMA 261
+#define END 262
 
 /* Value type.  */
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
@@ -79,7 +81,7 @@ union YYSTYPE
 
 	char * val;
 
-#line 83 "proyecto.tab.h"
+#line 85 "proyecto.tab.h"
 
 };
 typedef union YYSTYPE YYSTYPE;
