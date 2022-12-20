@@ -1,16 +1,16 @@
 FUENTE = proyecto
 FUENTE_ONLY_FLEX = proyecto
 
-PRUEBA1 = test1.xml # Test para comprobar que no tenemos tag inicio/fin con distintos nombres.
-PRUEBA2 = test2.xml # Test para comprobar que no falta el prólogo.
-PRUEBA3 = test3.xml # Test para comprobar que no tenemos tag de cierre.
-PRUEBA4 = test4.xml # Test para comprobar que no tenemos tags mal estructurados.
-PRUEBA5 = test5.xml # Test para comprobar que no existe "<" en los datos.
-PRUEBA6 = test6.xml # Test para comprobar que no existe "&" en los datos.
-PRUEBA7 = test7.xml # Test para comprobar que no exiten "--" en los comentarios.
-PRUEBA8 = test8.xml # Test para comprobar que no pueden existir más de un elemento raíz.
-PRUEBA9 = test9.xml # Test para comprobar pueden existir muchos subelementos.
-PRUEBA10 = test10.xml # Test para comprobar atributos
+PRUEBA1 = test1.xml
+PRUEBA2 = test2.xml
+PRUEBA3 = test3.xml
+PRUEBA4 = test4.xml
+PRUEBA5 = test5.xml
+PRUEBA6 = test6.xml
+PRUEBA7 = test7.xml
+PRUEBA8 = test8.xml
+PRUEBA9 = test9.xml
+PRUEBA10 = test10.xml
 
 LIB = lfl
 
