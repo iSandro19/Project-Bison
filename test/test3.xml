@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Comprobamos que existe siempre un cierre de tag -->
+<CD>
+    <TITLE>Empire Burlesque</TITLE>
+    <ARTIST>Bob Dylan</ARTIST>
+    <COUNTRY>USA
+    <COMPANY>Columbia</COMPANY>
+    <PRICE>10.90</PRICE>
+    <YEAR>1985</YEAR>
+</CD>
