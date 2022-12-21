@@ -6,8 +6,6 @@
 
 /*
  * To-do:
- * - Función para acceder a datos.
- * - Entradas para modificación/consulta de datos.
  * - Tratamiento de errores.
  */
 
@@ -134,33 +132,38 @@ void del_car(struct car) {
 
 // Función para mostrar las estadísticas globales
 void cars_stats() {
-	printf("---------------------------\n");
-	printf("ESTADÍSTICAS GLOBALES...\n");
-	printf("---------------------------\n\n");
-	printf("Número de coches registrados: %d\n", num_cars);
-	printf("Número de coches diesel: %d\n", num_diesel);
-	printf("Número de coches gasolina: %d\n", num_petrol);
-	printf("Número de coches a gas: %d\n", num_cng);
-	printf("Número de coches eléctricos: %d\n", num_electric);
-	printf("Media de cilindrada: %d\n", sum_engine_displacement/num_cars);
-	printf("Media de número de cilindros: %d\n", sum_number_cylinder/num_cars);
-	printf("Media de capacidad de asientos: %d\n", sum_seating_capacity/num_cars);
-	printf("Número de coches con cambio manual: %d\n", num_manual);
-	printf("Número de coches con cambio automático %d\n", num_automatic);
-	printf("Media de capacidad del depósito de combustible: %d\n", sum_fuel_tank_capacity/num_cars);
-	printf("Media de valoración de los vehículos: %d\n", sum_rating/num_cars);
-	printf("Coste medio: %d\n", ((sum_starting_price + sum_ending_price)/2)/num_cars);
-	printf("Media de par máximo (Nm): %d\n", sum_max_torque_nm/num_cars);
-	printf("Media de par máximo (rpm): %d\n", sum_max_torque_rpm/num_cars);
-	printf("Media de potencia (bhp): %d\n", sum_max_power_bhp/num_cars);
-	printf("Media de potencia (rpm): %d\n\n", sum_max_power_rpm/num_cars);
+	if(num_cars <= 0) {
+		printf("No hay coches registrados.\n");
+		return;
+	} else {
+		printf("---------------------------\n");
+		printf("ESTADÍSTICAS GLOBALES...\n");
+		printf("---------------------------\n\n");
+		printf("Número de coches registrados: %d\n", num_cars);
+		printf("Número de coches diesel: %d\n", num_diesel);
+		printf("Número de coches gasolina: %d\n", num_petrol);
+		printf("Número de coches a gas: %d\n", num_cng);
+		printf("Número de coches eléctricos: %d\n", num_electric);
+		printf("Media de cilindrada: %d\n", sum_engine_displacement/num_cars);
+		printf("Media de número de cilindros: %d\n", sum_number_cylinder/num_cars);
+		printf("Media de capacidad de asientos: %d\n", sum_seating_capacity/num_cars);
+		printf("Número de coches con cambio manual: %d\n", num_manual);
+		printf("Número de coches con cambio automático %d\n", num_automatic);
+		printf("Media de capacidad del depósito de combustible: %d\n", sum_fuel_tank_capacity/num_cars);
+		printf("Media de valoración de los vehículos: %d\n", sum_rating/num_cars);
+		printf("Coste medio: %d\n", ((sum_starting_price + sum_ending_price)/2)/num_cars);
+		printf("Media de par máximo (Nm): %d\n", sum_max_torque_nm/num_cars);
+		printf("Media de par máximo (rpm): %d\n", sum_max_torque_rpm/num_cars);
+		printf("Media de potencia (bhp): %d\n", sum_max_power_bhp/num_cars);
+		printf("Media de potencia (rpm): %d\n\n", sum_max_power_rpm/num_cars);
+	}
 }
 
 void search_by() {
 	printf("------------------------------------------------------------\n");
 	printf("BUSCANDO VEHÍCULOS QUE CUMPLAN DICHAS CARACTERÍSTICAS...\n");
 	printf("------------------------------------------------------------\n\n");
-	for (int i = 0; i < num_cars; i++) {
+	for(int i = 0; i < num_cars; i++) {
 		bool matches = true;
 		if (car.car_name != NULL && strcmp(cars[i].car_name, car.car_name) != 0) {
 			matches = false;
@@ -224,23 +227,32 @@ void search_by() {
 %token <val> STRING
 %token <val> INT
 %token <val> FLOAT
+%token <val> INVALID
 %token EQUAL
 %token COMMA
 %token COLON
 %token END
+%start S
 
 %%
 
-file: line {
+S: line {
 	printf("Final del archivo \n");
 }
 ;
 
 line: /* empty */
-	| car line
+	| content line
+	| END line {
+		printf("Operaciones disponibles:\n ADD_CAR\n DEL_CAR\n SHOW_ALL\n STATS\n SEARCH\n HELP\n EXIT\n");
+	}
+	| INVALID END {
+		snprintf(buffer, sizeof(buffer), "Caracter no reconocido: %s.", $1);
+		yyerror(buffer); YYERROR;
+	}
 ;
 
-car: COMMAND COLON data END {
+content: COMMAND COLON data END {
 		if (strcmp($1, "ADD_CAR") == 0) {
 			add_car(car);
 		}
@@ -248,8 +260,8 @@ car: COMMAND COLON data END {
 			del_car(car);
 		}
 		else {
-			printf("Comando no reconocido.\n");
-			printf("Operaciones disponibles:\n ADD_CAR\n DEL_CAR\n SHOW_ALL\n STATS\n SEARCH\n HELP\n EXIT\n");
+			snprintf(buffer, sizeof(buffer), "Comando no reconocido: %s.", $1);
+			yyerror(buffer); YYERROR;
 		}
 	}
 	| COMMAND COLON search END {
@@ -257,8 +269,8 @@ car: COMMAND COLON data END {
 			search_by();
 		}
 		else {
-			printf("Comando no reconocido.\n");
-			printf("Operaciones disponibles:\n ADD_CAR\n DEL_CAR\n SHOW_ALL\n STATS\n SEARCH\n HELP\n EXIT\n");
+			snprintf(buffer, sizeof(buffer), "Comando no reconocido: %s.", $1);
+			yyerror(buffer); YYERROR;
 		}
 	}
 	| COMMAND END {
@@ -275,11 +287,35 @@ car: COMMAND COLON data END {
 			printf("Final de la ejecución \n");
 			exit(0);
 		}
+		else {
+			snprintf(buffer, sizeof(buffer), "Comando no reconocido: %s.", $1);
+			yyerror(buffer); YYERROR;
+		}
 	}
-;
-
-comma: /* empty */
-	| COMMA
+	| STRING {
+		snprintf(buffer, sizeof(buffer), "Secuencia de contenido no válida: STRING");
+		yyerror(buffer); YYERROR;
+	}
+	| INT {
+		snprintf(buffer, sizeof(buffer), "Secuencia de contenido no válida: INT");
+		yyerror(buffer); YYERROR;
+	}
+	| FLOAT {
+		snprintf(buffer, sizeof(buffer), "Secuencia de contenido no válida: FLOAT");
+		yyerror(buffer); YYERROR;
+	}
+	| EQUAL {
+		snprintf(buffer, sizeof(buffer), "Secuencia de contenido no válida: EQUAL");
+		yyerror(buffer); YYERROR;
+	}
+	| COMMA {
+		snprintf(buffer, sizeof(buffer), "Secuencia de contenido no válida: COMMA");
+		yyerror(buffer); YYERROR;
+	}
+	| COLON {
+		snprintf(buffer, sizeof(buffer), "Secuencia de contenido no válida: COLON");
+		yyerror(buffer); YYERROR;
+	}
 ;
 
 search: /* empty */
@@ -340,6 +376,11 @@ search: /* empty */
 			car.max_power_bhp = atof($3);
 		}
 	}
+;
+
+comma: /* empty */
+	| COMMA
+;
 
 data: car_name 
 	  fuel_type
@@ -358,7 +399,8 @@ data: car_name
 	  max_power_rpm
 ;
 
-car_name: STRING COMMA {car.car_name = $1;};
+car_name: STRING COMMA {car.car_name = $1;}
+	| INT COMMA {};
 
 fuel_type: STRING COMMA {
 	car.fuel_type = $1;

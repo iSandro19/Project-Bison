@@ -8,7 +8,7 @@ SEARCH_CAR = ../test/search_test.csv
 
 LIB = lfl
 
-all: compile run1 run2 run3
+all: compile run1 run2 run3 run4
 
 compile:
 	flex $(FUENTE).l

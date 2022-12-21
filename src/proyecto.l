@@ -25,5 +25,6 @@ colon [:]+
 {comma} {return COMMA;}
 {colon} {return COLON;}
 \n {return END;}
+. {yylval.val = strdup(yytext); return INVALID;}
 
 %%
