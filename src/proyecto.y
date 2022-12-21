@@ -75,8 +75,12 @@ void show_cars() {
 	printf("----------------------------------\n");
 	printf("MOSTRANDO TODOS LOS COCHES...\n");
 	printf("----------------------------------\n\n");
-	for(int i = 0; i < num_cars; i++) {
-		show_car(i);
+	if(num_cars <= 0) {
+		printf("No hay ningún coche en la base de datos.\n\n");
+	} else {
+		for(int i = 0; i < num_cars; i++) {
+			show_car(i);
+		}
 	}
 }
 
@@ -111,7 +115,9 @@ void add_car(struct car) {
 
 // Función para eliminar un coche
 void del_car(struct car) {
+	printf("---------------------\n");
 	printf("ELIMINANDO COCHE...\n");
+	printf("---------------------\n\n");
 	for(int i = 0; i < num_cars; i++) {
 		if(strcmp(cars[i].car_name, car.car_name) == 0) {
 			show_car(i);
@@ -119,16 +125,20 @@ void del_car(struct car) {
 				cars[j] = cars[j+1];
 			}
 			num_cars--;
-			break;
+			return;
 		}
 	}
 	empty_car();
+	printf("No se ha encontrado ningún vehículo con dichos datos.\n\n");
 }
 
 // Función para mostrar las estadísticas globales
 void cars_stats() {
 	if(num_cars <= 0) {
-		printf("No hay coches registrados.\n");
+		printf("---------------------------\n");
+		printf("ESTADÍSTICAS GLOBALES...\n");
+		printf("---------------------------\n\n");
+		printf("No hay coches registrados.\n\n");
 		return;
 	} else {
 		printf("---------------------------\n");
@@ -239,7 +249,7 @@ S: line {
 line: /* empty */
 	| content line
 	| END line {
-		printf("Operaciones disponibles:\n ADD_CAR\n DEL_CAR\n SHOW_ALL\n STATS\n SEARCH\n HELP\n EXIT\n");
+		printf("Operaciones disponibles:\n ADD_CAR\n DEL_CAR\n SHOW_ALL\n CARS_STATS\n SEARCH_BY\n USAGE_HELP\n EXIT_APP\n");
 	}
 	| INVALID END {
 		snprintf(buffer, sizeof(buffer), "Carácter no reconocido: %s.", $1);
@@ -276,7 +286,7 @@ content: COMMAND COLON data END {
 			cars_stats();
 		}
 		else if (strcmp($1, "USAGE_HELP") == 0) {
-			printf("Operaciones disponibles:\n ADD_CAR\n DEL_CAR\n SHOW_ALL\n STATS\n SEARCH\n HELP\n EXIT\n");
+			printf("Operaciones disponibles:\n ADD_CAR\n DEL_CAR\n SHOW_ALL\n CARS_STATS\n SEARCH_BY\n USAGE_HELP\n EXIT_APP\n");
 		}
 		else if(strcmp($1, "EXIT_APP") == 0) {
 			printf("Final de la ejecución \n");
