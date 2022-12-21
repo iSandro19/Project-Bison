@@ -52,9 +52,10 @@ Resumen:
 - Eliminar coche (DEL_CAR).
 - Visualización de datos:
   - Mostrar todos los coches (SHOW_CARS).
-  - Con filtrado. (TODO).
   - Con ordeación. (TODO).
-- Búsqueda (TODO.)
+- Búsqueda:
+  - Individual por clave (TODO).
+  - Global por filtrado (TODO).
 - Estadísticas globales (CARS_STATS).
 - Ayuda (USAGE_HELP).
 - Salir (EXIT_APP).

@@ -8,7 +8,7 @@ ADD_CAR:Hyundai Creta,Diesel,1493,4,5.0,Automatic,50.0,SUV,4.5,11894,20712,250.0
 ADD_CAR:Tata Punch,Petrol,1199,3,5.0,Automatic,37.0,SUV,4.5,6756,10812,113.0,3400,84.48,6000
 ADD_CAR:Mahindra Bolero,Diesel,1498,3,7.0,Manual,60.0,SUV,4.5,10629,11689,210.0,2200,74.96,3600
 ADD_CAR:Maruti Swift,Petrol,1197,4,5.0,Automatic,37.0,Hatchback,4.0,6744,10083,113.0,4400,88.5,6000
-CARS_STATS
+SEARCH_BY:fuel_type=Petrol
 ADD_CAR:Tata Nexon,Diesel,1497,4,5.0,Automatic,44.0,SUV,4.5,8658,16041,260.0,2750,108.49,4000
 ADD_CAR:Hyundai Venue,Petrol,998,3,5.0,Automatic,45.0,SUV,4.5,8579,14492,172.0,4000,118.41,6000
 ADD_CAR:Kia Seltos,Diesel,1493,4,5.0,Automatic,50.0,SUV,4.5,11951,21248,250.0,2750,113.43,4000
@@ -49,5 +49,5 @@ ADD_CAR:Volkswagen Virtus,Petrol,1498,4,5.0,Automatic,45.0,Sedan,4.5,12783,20416
 ADD_CAR:Skoda Slavia,Petrol,1498,4,5.0,Automatic,45.0,Sedan,4.5,12521,20952,250.0,3500,147.52,6000
 ADD_CAR:Maruti Ignis,Petrol,1197,4,5.0,Automatic,32.0,Hatchback,4.5,6095,8795,113.0,4200,81.8,6000
 ADD_CAR:Skoda Octavia,Petrol,1984,4,5.0,Automatic,50.0,Sedan,4.5,30590,34008,320.0,3990,187.74,6000
-CARS_STATS
-EXIT_APP
+SEARCH_BY:transmission_type=Manual,fuel_type=Petrol
+SEARCH_BY:seating_capacity=5.0,body_type=Sedan

@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 /*
  * To-do:
@@ -12,7 +13,7 @@
 
 // Definición de la estructura
 struct car {
-    char *name_car;
+    char *car_name;
     char *fuel_type;
     int engine_displacement;
     int number_cylinder;
@@ -58,8 +59,8 @@ void yyerror(char *s);
 char buffer[1024];
 
 // Función de print
-void show(int i) {
-	printf("Nombre del coche: %s\n", cars[i].name_car);
+void show_car(int i) {
+	printf("Nombre del coche: %s\n", cars[i].car_name);
 	printf("Tipo de combustible: %s\n", cars[i].fuel_type);
 	printf("Cilindrada: %d\n", cars[i].engine_displacement);
 	printf("Número de cilindros: %d\n", cars[i].number_cylinder);
@@ -77,25 +78,50 @@ void show(int i) {
 }
 
 // Función para mostrar todos los datos
-void show_all() {
+void show_cars() {
+	printf("----------------------------------\n");
+	printf("MOSTRANDO TODOS LOS COCHES...\n");
+	printf("----------------------------------\n\n");
 	for(int i = 0; i < num_cars; i++) {
-		printf("Mostrando coche %d...\n", i+1);
-		show(i);
+		show_car(i);
 	}
 }
 
-void add_car(struct car) {
-	printf("Añadiendo coche...\n");
-	cars[num_cars] = car;
-	show(num_cars);
-	num_cars++;
+void empty_car() {
+	car.car_name = NULL;
+	car.fuel_type = NULL;
+	car.engine_displacement = 0;
+	car.number_cylinder = 0;
+	car.seating_capacity = 0.0;
+	car.transmission_type = NULL;
+	car.fuel_tank_capacity = 0.0;
+	car.body_type = NULL;
+	car.rating = 0.0;
+	car.starting_price = 0;
+	car.ending_price = 0;
+	car.max_torque_nm = 0.0;
+	car.max_torque_rpm = 0;
+	car.max_power_bhp = 0.0;
+	car.max_power_rpm = 0;
 }
 
+// Función para añadir un coche
+void add_car(struct car) {
+	printf("---------------------\n");
+	printf("AÑADIENDO COCHE...\n");
+	printf("---------------------\n\n");
+	cars[num_cars] = car;
+	show_car(num_cars);
+	num_cars++;
+	empty_car();
+}
+
+// Función para eliminar un coche
 void del_car(struct car) {
-	printf("Eliminando coche...\n");
+	printf("ELIMINANDO COCHE...\n");
 	for(int i = 0; i < num_cars; i++) {
-		if(strcmp(cars[i].name_car, car.name_car) == 0) {
-			show(i);
+		if(strcmp(cars[i].car_name, car.car_name) == 0) {
+			show_car(i);
 			for(int j = i; j < num_cars; j++) {
 				cars[j] = cars[j+1];
 			}
@@ -103,6 +129,89 @@ void del_car(struct car) {
 			break;
 		}
 	}
+	empty_car();
+}
+
+// Función para mostrar las estadísticas globales
+void cars_stats() {
+	printf("---------------------------\n");
+	printf("ESTADÍSTICAS GLOBALES...\n");
+	printf("---------------------------\n\n");
+	printf("Número de coches registrados: %d\n", num_cars);
+	printf("Número de coches diesel: %d\n", num_diesel);
+	printf("Número de coches gasolina: %d\n", num_petrol);
+	printf("Número de coches a gas: %d\n", num_cng);
+	printf("Número de coches eléctricos: %d\n", num_electric);
+	printf("Media de cilindrada: %d\n", sum_engine_displacement/num_cars);
+	printf("Media de número de cilindros: %d\n", sum_number_cylinder/num_cars);
+	printf("Media de capacidad de asientos: %d\n", sum_seating_capacity/num_cars);
+	printf("Número de coches con cambio manual: %d\n", num_manual);
+	printf("Número de coches con cambio automático %d\n", num_automatic);
+	printf("Media de capacidad del depósito de combustible: %d\n", sum_fuel_tank_capacity/num_cars);
+	printf("Media de valoración de los vehículos: %d\n", sum_rating/num_cars);
+	printf("Coste medio: %d\n", ((sum_starting_price + sum_ending_price)/2)/num_cars);
+	printf("Media de par máximo (Nm): %d\n", sum_max_torque_nm/num_cars);
+	printf("Media de par máximo (rpm): %d\n", sum_max_torque_rpm/num_cars);
+	printf("Media de potencia (bhp): %d\n", sum_max_power_bhp/num_cars);
+	printf("Media de potencia (rpm): %d\n\n", sum_max_power_rpm/num_cars);
+}
+
+void search_by() {
+	printf("------------------------------------------------------------\n");
+	printf("BUSCANDO VEHÍCULOS QUE CUMPLAN DICHAS CARACTERÍSTICAS...\n");
+	printf("------------------------------------------------------------\n\n");
+	for (int i = 0; i < num_cars; i++) {
+		bool matches = true;
+		if (car.car_name != NULL && strcmp(cars[i].car_name, car.car_name) != 0) {
+			matches = false;
+		}
+		if (car.fuel_type != NULL && strcmp(cars[i].fuel_type, car.fuel_type) != 0) {
+			matches = false;
+		}
+		if (car.engine_displacement != 0 && cars[i].engine_displacement != car.engine_displacement) {
+			matches = false;
+		}
+		if (car.number_cylinder != 0 && cars[i].number_cylinder != car.number_cylinder) {
+			matches = false;
+		}
+		if (car.seating_capacity != 0.0 && cars[i].seating_capacity != car.seating_capacity) {
+			matches = false;
+		}
+		if (car.transmission_type != NULL && strcmp(cars[i].transmission_type, car.transmission_type) != 0) {
+			matches = false;
+		}
+		if (car.fuel_tank_capacity != 0.0 && cars[i].fuel_tank_capacity != car.fuel_tank_capacity) {
+			matches = false;
+		}
+		if (car.body_type != NULL && strcmp(cars[i].body_type, car.body_type) != 0) {
+			matches = false;
+		}
+		if (car.rating != 0.0 && cars[i].rating != car.rating) {
+			matches = false;
+		}
+		if (car.starting_price != 0 && cars[i].starting_price != car.starting_price) {
+			matches = false;
+		}
+		if (car.ending_price != 0 && cars[i].ending_price != car.ending_price) {
+			matches = false;
+		}
+		if (car.max_torque_nm != 0 && cars[i].max_torque_nm != car.max_torque_nm) {
+			matches = false;
+		}
+		if (car.max_torque_rpm != 0 && cars[i].max_torque_rpm != car.max_torque_rpm) {
+			matches = false;
+		}
+		if (car.max_power_bhp != 0 && cars[i].max_power_bhp != car.max_power_bhp) {
+			matches = false;
+		}
+		if (car.max_power_rpm != 0 && cars[i].max_power_rpm != car.max_power_rpm) {
+			matches = false;
+		}
+		if (matches) {
+			show_car(i);
+		}
+	}
+	empty_car();
 }
 
 %}
@@ -111,75 +220,136 @@ void del_car(struct car) {
 	char * val;
 }
 %token <val> COMMAND
+%token <val> KEY
 %token <val> STRING
 %token <val> INT
 %token <val> FLOAT
+%token EQUAL
 %token COMMA
+%token COLON
 %token END
 
 %%
 
 file: line {
-		printf("Final del archivo \n");
-	}
+	printf("Final del archivo \n");
+}
 ;
 
 line: /* empty */
 	| car line
 ;
 
-car: COMMAND data END {
+car: COMMAND COLON data END {
 		if (strcmp($1, "ADD_CAR") == 0) {
 			add_car(car);
 		}
 		else if (strcmp($1, "DEL_CAR") == 0) {
 			del_car(car);
 		}
-		else if (strcmp($1, "USAGE_HELP") == 0) {
+		else {
+			printf("Comando no reconocido.\n");
 			printf("Operaciones disponibles:\n ADD_CAR\n DEL_CAR\n SHOW_ALL\n STATS\n SEARCH\n HELP\n EXIT\n");
 		}
-		else if (strcmp($1, "SHOW_ALL") == 0) {
-			show_all();
-		}
-		else if(strcmp($1, "EXIT_APP") == 0) {
-			printf("Final de la ejecución \n");
-			exit(0);
-		}
-		else if (strcmp($1, "CARS_STATS") == 0) {
-			printf("Estadísticas...\n");
-			printf("Número de coches registrados: %d\n", num_cars);
-			printf("Número de coches diesel: %d\n", num_diesel);
-			printf("Número de coches gasolina: %d\n", num_petrol);
-			printf("Número de coches a gas: %d\n", num_cng);
-			printf("Número de coches eléctricos: %d\n", num_electric);
-			printf("Media de cilindrada: %d\n", sum_engine_displacement/num_cars);
-			printf("Media de número de cilindros: %d\n", sum_number_cylinder/num_cars);
-			printf("Media de capacidad de asientos: %d\n", sum_seating_capacity/num_cars);
-			printf("Número de coches con cambio manual: %d\n", num_manual);
-			printf("Número de coches con cambio automático %d\n", num_automatic);
-			printf("Media de capacidad del depósito de combustible: %d\n", sum_fuel_tank_capacity/num_cars);
-			printf("Media de valoración de los vehículos: %d\n", sum_rating/num_cars);
-			printf("Coste medio: %d\n", ((sum_starting_price + sum_ending_price)/2)/num_cars);
-			printf("Media de par máximo (Nm): %d\n", sum_max_torque_nm/num_cars);
-			printf("Media de par máximo (rpm): %d\n", sum_max_torque_rpm/num_cars);
-			printf("Media de potencia (bhp): %d\n", sum_max_power_bhp/num_cars);
-			printf("Media de potencia (rpm): %d\n\n", sum_max_power_rpm/num_cars);
+	}
+	| COMMAND COLON search END {
+		if (strcmp($1, "SEARCH_BY") == 0) {
+			search_by();
 		}
 		else {
 			printf("Comando no reconocido.\n");
 			printf("Operaciones disponibles:\n ADD_CAR\n DEL_CAR\n SHOW_ALL\n STATS\n SEARCH\n HELP\n EXIT\n");
 		}
 	}
+	| COMMAND END {
+		if (strcmp($1, "SHOW_CARS") == 0) {
+			show_cars();
+		}
+		else if (strcmp($1, "CARS_STATS") == 0) {
+			cars_stats();
+		}
+		else if (strcmp($1, "USAGE_HELP") == 0) {
+			printf("Operaciones disponibles:\n ADD_CAR\n DEL_CAR\n SHOW_ALL\n STATS\n SEARCH\n HELP\n EXIT\n");
+		}
+		else if(strcmp($1, "EXIT_APP") == 0) {
+			printf("Final de la ejecución \n");
+			exit(0);
+		}
+	}
+;
 
-data: /* empty */
-	| name_car 
+comma: /* empty */
+	| COMMA
+;
+
+search: /* empty */
+	| KEY EQUAL STRING comma search {
+		if (strcmp($1, "car_name") == 0) {
+			car.car_name = $3;
+		}
+		else if (strcmp($1, "fuel_type") == 0) {
+			car.fuel_type = $3;
+		}
+		else if (strcmp($1, "transmission_type") == 0) {
+			car.transmission_type = $3;
+		}
+		else if (strcmp($1, "body_type") == 0) {
+			car.body_type = $3;
+		}
+		else {
+			printf("Error en la búsqueda, clave %s no existente.\n", $1);
+		}
+	}
+	| KEY EQUAL INT comma search {
+		if (strcmp($1, "engine_displacement") == 0) {
+			car.engine_displacement = atoi($3);
+		}
+		else if (strcmp($1, "number_cylinder") == 0) {
+			car.number_cylinder = atoi($3);
+		}
+		else if (strcmp($1, "starting_price") == 0) {
+			car.starting_price = atoi($3);
+		}
+		else if (strcmp($1, "ending_price") == 0) {
+			car.ending_price = atoi($3);
+		}
+		else if (strcmp($1, "max_torque_rpm") == 0) {
+			car.max_torque_rpm = atoi($3);
+		}
+		else if (strcmp($1, "max_power_rpm") == 0) {
+			car.max_power_rpm = atoi($3);
+		}
+		else {
+			printf("Error en la búsqueda, clave %s no existente.\n", $1);
+		}
+	}
+	| KEY EQUAL FLOAT comma search {
+		if (strcmp($1, "seating_capacity") == 0) {
+			car.seating_capacity = atof($3);
+		}
+		else if (strcmp($1, "fuel_tank_capacity") == 0) {
+			car.fuel_tank_capacity = atof($3);
+		}
+		else if (strcmp($1, "rating") == 0) {
+			car.rating = atof($3);
+		}
+		else if (strcmp($1, "max_torque_nm") == 0) {
+			car.max_torque_nm = atof($3);
+		}
+		else if (strcmp($1, "max_power_bhp") == 0) {
+			car.max_power_bhp = atof($3);
+		}
+	}
+
+data: car_name 
 	  fuel_type
 	  engine_displacement
 	  number_cylinder
 	  seating_capacity
 	  transmission_type
 	  fuel_tank_capacity
-	  body_type rating
+	  body_type
+	  rating
 	  starting_price
 	  ending_price
 	  max_torque_nm
@@ -188,7 +358,7 @@ data: /* empty */
 	  max_power_rpm
 ;
 
-name_car: STRING COMMA {car.name_car = $1;};
+car_name: STRING COMMA {car.car_name = $1;};
 
 fuel_type: STRING COMMA {
 	car.fuel_type = $1;
