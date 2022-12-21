@@ -13,13 +13,13 @@ El objetivo de este proyecto es el parseo y procesado de datos de ficheros de en
 Los ficheros de entrada tendrán la siguiente estructura por cada línea. En primer lugar, para añadir un vehícuo se realizará de la siguiente manera:
 
 ```txt
-ADD_CAR car_name, fuel_type, engine_displacement, number_cylinder, seating_capacity, transmission_type, fuel_tank_capacity, body_type, rating, starting_price, ending_price, max_torque_nm, max_torque_rpm, max_power_bhp, max_power_rp
+ADD_CAR:car_name,fuel_type,engine_displacement,number_cylinder,seating_capacity,transmission_type,fuel_tank_capacity,body_type,rating,starting_price,ending_price,max_torque_nm,max_torque_rpm,max_power_bhp,max_power_rp
 ```
 
 Para eliminar un vehículo se realizará de la siguiente manera (tenemos que especificar todos los datos para evitar borrar modelos indeseados):
 
 ```txt
-DEL_CAR car_name, fuel_type, engine_displacement, number_cylinder, seating_capacity, transmission_type, fuel_tank_capacity, body_type, rating, starting_price, ending_price, max_torque_nm, max_torque_rpm, max_power_bhp, max_power_rp
+DEL_CAR:car_name,fuel_type,engine_displacement,number_cylinder,seating_capacity,transmission_type,fuel_tank_capacity,body_type,rating,starting_price,ending_price,max_torque_nm,max_torque_rpm,max_power_bhp,max_power_rp
 ```
 
 Si queremos obtener estadísticas globales de todos los vehículos de nuestra base de datos podemos escribir lo siguiente:
@@ -32,6 +32,13 @@ Si queremos que se muestre por pantalla todos los vehículos:
   
 ```txt
 SHOW_CARS
+```
+
+Podemos buscar coches en la base de datos con las características que necesitemos de la siguiente manera:
+
+```txt
+SEARCH_CARS:fuel_type=Diesel,seating_capacity=5.0
+SEARCH_CARS:transmission_type=Automatic
 ```
 
 Para ver todos los comandos en le ejecución podemos hacer:
