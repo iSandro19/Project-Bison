@@ -1,0 +1,18 @@
+ADD_CAR:Maruti Alto K10,Petrol,998,3,5.0,Automatic,27.0,Hatchback,4.5,4545,6642,89.0,3500,65.71,5500
+ADD_CAR:Maruti Brezza,Petrol,1462,4,5.0,Automatic,48.0,SUV,4.5,9103,15904,136.8,4400,101.65,6000
+CARS_STATS
+SHOW_CARS
+DEL_CAR:Maruti Alto K10,Petrol,998,3,5.0,Automatic,27.0,Hatchback,4.5,4545,6642,89.0,3500,65.71,5500
+DEL_CAR:Maruti Brezza,Petrol,1462,4,5.0,Automatic,48.0,SUV,4.5,9103,15904,136.8,4400,101.65,6000
+CARS_STATS
+SHOW_CARS
+ADD_CAR:Hyundai Alcazar,Diesel,1493,4,7.0,Automatic,50.0,SUV,4.0,18103,23071,250.0,2750,113.42,4000
+ADD_CAR:Hyundai Aura,Petrol,998,3,5.0,Manual,37.0,Sedan,4.5,6938,10105,172.0,4000,98.63,6000
+ADD_CAR:Volkswagen Virtus,Petrol,1498,4,5.0,Automatic,45.0,Sedan,4.5,12783,20416,250.0,3500,147.51,6000
+ADD_CAR:Skoda Slavia,Petrol,1498,4,5.0,Automatic,45.0,Sedan,4.5,12521,20952,250.0,3500,147.52,6000
+ADD_CAR:Maruti Ignis,Petrol,1197,4,5.0,Automatic,32.0,Hatchback,4.5,6095,8795,113.0,4200,81.8,6000
+ADD_CAR:Skoda Octavia,Petrol,1984,4,5.0,Automatic,50.0,Sedan,4.5,30590,34008,320.0,3990,187.74,6000
+SEARCH_BY:fuel_type=Diesel
+SEARCH_BY:transmission_type=Automatic,seating_capacity=5.0,body_type=Sedan
+USAGE_HELP
+EXIT_APP

@@ -4,11 +4,6 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-/*
- * To-do:
- * - Tratamiento de errores.
- */
-
 // Definición de la estructura
 struct car {
     char *car_name;
@@ -247,7 +242,7 @@ line: /* empty */
 		printf("Operaciones disponibles:\n ADD_CAR\n DEL_CAR\n SHOW_ALL\n STATS\n SEARCH\n HELP\n EXIT\n");
 	}
 	| INVALID END {
-		snprintf(buffer, sizeof(buffer), "Caracter no reconocido: %s.", $1);
+		snprintf(buffer, sizeof(buffer), "Carácter no reconocido: %s.", $1);
 		yyerror(buffer); YYERROR;
 	}
 ;
@@ -497,4 +492,4 @@ extern FILE *yyin;
 }
 
 extern int yylineno;
-void yyerror(char *s) {fprintf (stderr, "Sintaxis incorrecta en línea %d: %s\n\n\n", yylineno, s);}
+void yyerror(char *s) {fprintf (stderr, "Sintaxis incorrecta en línea %d: %s\n", yylineno, s);}
