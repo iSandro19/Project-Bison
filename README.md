@@ -6,25 +6,58 @@
 
 ## Descripción
 
-El objetivo de este proyecto es el parseo y procesado de datos de ficheros de entrada. Estos ficheros tendrán datos e información sobre vehículos, que serán recogidos para cargarlos en memoria. Esto lo haremos con un struct en C para poder acceder a ellos de forma cómoda y realizar estadísticas sobre los datos.
+El objetivo de este proyecto es el parseo y procesado de datos de ficheros de entrada. Estos ficheros tendrán datos e información sobre vehículos, que serán recogidos para cargarlos en memoria. Podremos especificar si queremos añadir esos datos a una base de datos simulada en C a base de structs, eliminarlos, hacer búsquedas, estadísticas...
 
 ## Ficheros de entrada
 
-Los ficheros de entrada tendrán la siguiente estructura por cada línea:
+Los ficheros de entrada tendrán la siguiente estructura por cada línea. En primer lugar, para añadir un vehícuo se realizará de la siguiente manera:
 
 ```txt
-car_name, fuel_type, engine_displacement, number_cylinder, seating_capacity, transmission_type, fuel_tank_capacity, body_type, rating, starting_price, ending_price, max_torque_nm, max_torque_rpm, max_power_bhp, max_power_rp
+ADD_CAR car_name, fuel_type, engine_displacement, number_cylinder, seating_capacity, transmission_type, fuel_tank_capacity, body_type, rating, starting_price, ending_price, max_torque_nm, max_torque_rpm, max_power_bhp, max_power_rp
 ```
 
-Como se puede ver, por cada línea tendremos el nombre de la marca y modelo del vehículo, la cilindrada, número de cilindos... Como se ha mecionado ya, estos datos serán parseados y guardados en memoria para poder realizar operaciones sobre los datos.
+Para eliminar un vehículo se realizará de la siguiente manera (tenemos que especificar todos los datos para evitar borrar modelos indeseados):
 
-Operaciones:
+```txt
+DEL_CAR car_name, fuel_type, engine_displacement, number_cylinder, seating_capacity, transmission_type, fuel_tank_capacity, body_type, rating, starting_price, ending_price, max_torque_nm, max_torque_rpm, max_power_bhp, max_power_rp
+```
 
-- Añadir coche.
-- Eliminar coche.
+Si queremos obtener estadísticas globales de todos los vehículos de nuestra base de datos podemos escribir lo siguiente:
+
+```txt
+CARS_STATS
+```
+
+Si queremos que se muestre por pantalla todos los vehículos:
+  
+```txt
+SHOW_CARS
+```
+
+Para ver todos los comandos en le ejecución podemos hacer:
+
+```txt
+USAGE_HELP
+```
+
+Finalmente para salir:
+
+```txt
+EXIT_APP
+```
+
+Resumen:
+
+- Añadir coche (ADD_CAR).
+- Eliminar coche (DEL_CAR).
 - Visualización de datos:
-  - Con filtrado.
-  - Con ordeación.
+  - Mostrar todos los coches (SHOW_CARS).
+  - Con filtrado. (TODO).
+  - Con ordeación. (TODO).
+- Búsqueda (TODO.)
+- Estadísticas globales (CARS_STATS).
+- Ayuda (USAGE_HELP).
+- Salir (EXIT_APP).
 
 ## Desarrollo, funcionamiento y peculiaridades
 
