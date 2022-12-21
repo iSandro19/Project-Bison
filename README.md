@@ -6,7 +6,7 @@
 
 ## Descripción
 
-El objetivo de este proyecto es el parseo y procesado de datos de ficheros de entrada. Estos ficheros tendrán datos e información sobre vehículos, que serán recogidos para cargarlos en memoria. Podremos especificar si queremos añadir esos datos a una base de datos simulada en C a base de structs, eliminarlos, hacer búsquedas, estadísticas...
+El objetivo de este proyecto es el parseo y procesado de datos de ficheros de entrada. Estos ficheros tendrán datos e información sobre vehículos u operaciones sobre lo que tenemos almacenado en memoria.. Podremos especificar si queremos añadir esos datos a una base de datos simulada en C a base de structs, eliminarlos, hacer búsquedas, estadísticas...
 
 ## Ficheros de entrada
 
@@ -37,8 +37,8 @@ SHOW_CARS
 Podemos buscar coches en la base de datos con las características que necesitemos de la siguiente manera:
 
 ```txt
-SEARCH_CARS:fuel_type=Diesel,seating_capacity=5.0
-SEARCH_CARS:transmission_type=Automatic
+SEARCH_BY:fuel_type=Diesel,seating_capacity=5.0
+SEARCH_BY:transmission_type=Automatic
 ```
 
 Para ver todos los comandos en le ejecución podemos hacer:
@@ -57,12 +57,8 @@ Resumen:
 
 - Añadir coche (ADD_CAR).
 - Eliminar coche (DEL_CAR).
-- Visualización de datos:
-  - Mostrar todos los coches (SHOW_CARS).
-  - Con ordeación. (TODO).
-- Búsqueda:
-  - Individual por clave (TODO).
-  - Global por filtrado (TODO).
+- Visualización de todos los datos (SHOW_CARS).
+- Búsqueda (SEARCH_BY)
 - Estadísticas globales (CARS_STATS).
 - Ayuda (USAGE_HELP).
 - Salir (EXIT_APP).
@@ -84,8 +80,8 @@ Con el programa en FLEX detectamos todos los caracteres de una cadena de texto o
 - proyecto.l: programa en flex.
 - proyecto.y: programa en bison.
 - README.md: memoria (este archivo).
-- Makefile: archivo para compilar el programa y ejecutarlo
-- test.csv: archivos XML para testear el programa.
+- Makefile: archivo para compilar el programa y ejecutarlo.
+- test.car: archivo de entrada para comprobar el funcionamiento.
 
 ---
 
