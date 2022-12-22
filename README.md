@@ -67,13 +67,15 @@ Resumen:
 
 ### Desarrollo en 3 etapas
 
-La primera de ellas será la composición del archivo flex de la práctica. En esta parte se edita el fichero proyecto.l para lograr que se identifiquen todos los elementos que componen a los .car (ficheros de entrada). Estos elementos son los commandos (palabras en mayúscula con barra baja), las claves (palabras en minúscula con barra baja), los strings (palabras con minúsculas/mayúsculas/enteros/espacios/guiones), enteros, flotantes, la coma, los dos puntos y el signo igual. A mayores identificamos el retorno de carro y 
+La primera de ellas será la composición del archivo flex de la práctica. En esta parte se edita el fichero proyecto.l para lograr que se identifiquen todos los elementos que componen a los .car (ficheros de entrada). Estos elementos son los commandos (palabras en mayúscula con barra baja), las claves (palabras en minúscula con barra baja), los strings (palabras con minúsculas/mayúsculas/enteros/espacios/guiones), enteros, flotantes, la coma, los dos puntos y el signo igual. A mayores identificamos el retorno de carro (para detectar el final de linea) y el resto de caracteres (para detección de fallos).
 
-La segunda parte de la prácticas será la composición del archivo bison/yacc de la práctica correspondiente a la gramática. En esta parte se edita el fichero proyecto.y.
+La segunda parte de la prácticas será la composición del archivo bison/yacc de la práctica correspondiente a la gramática. En esta parte se edita el fichero proyecto.y. Añadimos a la gramática todas las combinaciones que acepta, procurando recoger todos los errores posibles.
+
+La tercera etapa, la construcción de los tests, la fuimos desarrollando a lo largo de las 2 anteriores para ir comprobando que todo lo que realizábamos seguía funcionando correctamente.
 
 ### Funcionamiento
 
-Con el programa en FLEX detectamos todos los caracteres de una cadena de texto o fichero, que se pasan a BISON para que comprobemos con nuestras reglas si coincide con cómo tienen que ser un XML. En caso de que no sea así mostraremos un mensaje de error. Para ejecutarla basta con ejecutar `make all` (compilará y ejecutará los 10 tests con el mensaje explictivo de cada uno) o `make compile` y `make runX` (siendo X el número de test).
+Con el programa en FLEX detectamos todos los caracteres de una cadena de texto o fichero, que se pasan a BISON para que comprobemos con nuestras reglas si coincide con cómo tienen que ser. En caso de que no sea así mostraremos un mensaje de error. Para ejecutarla basta con ejecutar `make all` (compilará y ejecutará los 6 tests con el mensaje explictivo de cada uno) o `make compile` y `make runX` (siendo X el número de test). Los runs del 1 al 5 son para comprobar funcionalidades, siendo el run6 el que se encarga de comprobar errores varios.
 
 ### Contenido
 
