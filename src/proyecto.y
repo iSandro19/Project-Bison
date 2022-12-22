@@ -416,16 +416,21 @@ car_name: STRING COMMA {car.car_name = $1;}
 ;
 
 fuel_type: STRING COMMA {
-	car.fuel_type = $1;
-	if(strcmp("Diesel", car.fuel_type) == 0) num_diesel++;
-	else if(strcmp("Petrol", car.fuel_type) == 0) num_petrol++;
-	else if(strcmp("CNG", car.fuel_type) == 0) num_cng++;
-	else if(strcmp("Electric", car.fuel_type) == 0) num_electric++;
-	else {
-		snprintf(buffer, sizeof(buffer), "fuel_type could only be: Diesel, Petrol, CNG or Electric");
+		car.fuel_type = $1;
+		if(strcmp("Diesel", car.fuel_type) == 0) num_diesel++;
+		else if(strcmp("Petrol", car.fuel_type) == 0) num_petrol++;
+		else if(strcmp("CNG", car.fuel_type) == 0) num_cng++;
+		else if(strcmp("Electric", car.fuel_type) == 0) num_electric++;
+		else {
+			snprintf(buffer, sizeof(buffer), "fuel_type could only be: Diesel, Petrol, CNG or Electric");
+			yyerror(buffer); YYERROR;
+		}
+	}
+	| COMMA {
+		snprintf(buffer, sizeof(buffer), "fuel_type cannot be empty");
 		yyerror(buffer); YYERROR;
 	}
-};
+;
 
 engine_displacement: INT COMMA {
 		car.engine_displacement = atoi($1);

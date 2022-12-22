@@ -6,7 +6,7 @@
 
 ## Descripción
 
-El objetivo de este proyecto es el parseo y procesado de datos de ficheros de entrada. Estos ficheros tendrán datos e información sobre vehículos u operaciones sobre lo que tenemos almacenado en memoria.. Podremos especificar si queremos añadir esos datos a una base de datos simulada en C a base de structs, eliminarlos, hacer búsquedas, estadísticas...
+El objetivo de este proyecto es el parseo y procesado de datos de ficheros de entrada. Estos ficheros tendrán datos e información sobre vehículos u operaciones sobre lo que tenemos almacenado en memoria. Podremos especificar si queremos añadir esos datos a una base de datos simulada en C a base de structs, eliminarlos, hacer búsquedas, estadísticas...
 
 ## Ficheros de entrada
 
@@ -16,7 +16,7 @@ Los ficheros de entrada tendrán la siguiente estructura por cada línea. En pri
 ADD_CAR:car_name,fuel_type,engine_displacement,number_cylinder,seating_capacity,transmission_type,fuel_tank_capacity,body_type,rating,starting_price,ending_price,max_torque_nm,max_torque_rpm,max_power_bhp,max_power_rp
 ```
 
-Para eliminar un vehículo se realizará de la siguiente manera (tenemos que especificar todos los datos para evitar borrar modelos indeseados):
+Para eliminar un vehículo se realizará así (tenemos que especificar todos los datos para evitar borrar modelos indeseados):
 
 ```txt
 DEL_CAR:car_name,fuel_type,engine_displacement,number_cylinder,seating_capacity,transmission_type,fuel_tank_capacity,body_type,rating,starting_price,ending_price,max_torque_nm,max_torque_rpm,max_power_bhp,max_power_rp
@@ -67,7 +67,7 @@ Resumen:
 
 ### Desarrollo en 3 etapas
 
-La primera de ellas será la composición del archivo flex de la práctica. En esta parte se edita el fichero proyecto.l para lograr que se identifiquen todos los elementos del .csv.
+La primera de ellas será la composición del archivo flex de la práctica. En esta parte se edita el fichero proyecto.l para lograr que se identifiquen todos los elementos que componen a los .car (ficheros de entrada). Estos elementos son los commandos (palabras en mayúscula con barra baja), las claves (palabras en minúscula con barra baja), los strings (palabras con minúsculas/mayúsculas/enteros/espacios/guiones), enteros, flotantes, la coma, los dos puntos y el signo igual. A mayores identificamos el retorno de carro y 
 
 La segunda parte de la prácticas será la composición del archivo bison/yacc de la práctica correspondiente a la gramática. En esta parte se edita el fichero proyecto.y.
 
