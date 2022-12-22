@@ -4,12 +4,12 @@ FUENTE_ONLY_FLEX = proyecto
 ADD_TEST = ../test/add_test.car
 DEL_TEST = ../test/del_test.car
 STATS_TEST = ../test/stat_test.car
-SEARCH_CAR = ../test/search_test.car
-TEST = ../test/test.car
+SEARCH_TEST = ../test/search_test.car
+OVERALL_TEST = ../test/overall_test.car
 
 LIB = lfl
 
-all: compile run1 run2 run3 run4 test
+all: compile run1 run2 run3 run4 run5
 
 compile:
 	flex $(FUENTE).l
@@ -32,8 +32,8 @@ run4:
 	@echo "Ejecución de la prueba para buscar vehículos:"
 	@./$(FUENTE) < $(SEARCH_CAR)
 
-test:
-	@echo "Ejecución de varias pruebas:"
+run5:
+	@echo "Ejecución de una prueba general:"
 	@./$(FUENTE) < $(TEST)
 
 clean:
