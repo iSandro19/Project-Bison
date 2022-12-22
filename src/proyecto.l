@@ -10,9 +10,9 @@ key [a-z]+[_]+[a-z]+
 int [0-9]+
 float [0-9.0-9]+
 string [a-zA-Z0-9 -]+
-comma [,]+
-equal [=]+
-colon [:]+
+comma ,
+equal =
+colon :
 
 %%
 

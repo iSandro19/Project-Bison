@@ -251,10 +251,14 @@ line: /* empty */
 	| END line {
 		printf("Operaciones disponibles:\n ADD_CAR\n DEL_CAR\n SHOW_ALL\n CARS_STATS\n SEARCH_BY\n USAGE_HELP\n EXIT_APP\n");
 	}
-	| INVALID END {
-		snprintf(buffer, sizeof(buffer), "Carácter no reconocido: %s.", $1);
+	| invalid {
+		snprintf(buffer, sizeof(buffer), "Archivo de entrada no válido");
 		yyerror(buffer); YYERROR;
 	}
+;
+
+invalid: INVALID END
+	| INVALID invalid
 ;
 
 content: COMMAND COLON data END {
@@ -405,7 +409,11 @@ data: car_name
 ;
 
 car_name: STRING COMMA {car.car_name = $1;}
-	| INT COMMA {};
+	| COMMA {
+		snprintf(buffer, sizeof(buffer), "car_name cannot be empty");
+		yyerror(buffer); YYERROR;
+	}
+;
 
 fuel_type: STRING COMMA {
 	car.fuel_type = $1;
@@ -413,70 +421,145 @@ fuel_type: STRING COMMA {
 	else if(strcmp("Petrol", car.fuel_type) == 0) num_petrol++;
 	else if(strcmp("CNG", car.fuel_type) == 0) num_cng++;
 	else if(strcmp("Electric", car.fuel_type) == 0) num_electric++;
+	else {
+		snprintf(buffer, sizeof(buffer), "fuel_type could only be: Diesel, Petrol, CNG or Electric");
+		yyerror(buffer); YYERROR;
+	}
 };
 
 engine_displacement: INT COMMA {
-	car.engine_displacement = atoi($1);
-	sum_engine_displacement += car.engine_displacement;
-};
+		car.engine_displacement = atoi($1);
+		sum_engine_displacement += car.engine_displacement;
+	}
+	| COMMA {
+		snprintf(buffer, sizeof(buffer), "engine_displacement cannot be empty");
+		yyerror(buffer); YYERROR;
+	}
+;
 
 number_cylinder: INT COMMA {
-	car.number_cylinder = atoi($1);
-	sum_number_cylinder += car.number_cylinder;
-};
+		car.number_cylinder = atoi($1);
+		sum_number_cylinder += car.number_cylinder;
+	}
+	| COMMA {
+		snprintf(buffer, sizeof(buffer), "number_cylinder cannot be empty");
+		yyerror(buffer); YYERROR;
+	}
+;
 
 seating_capacity: FLOAT COMMA {
-	car.seating_capacity = atof($1);
-	sum_seating_capacity += car.seating_capacity;
-};
+		car.seating_capacity = atof($1);
+		sum_seating_capacity += car.seating_capacity;
+	}
+	| COMMA {
+		snprintf(buffer, sizeof(buffer), "seating_capacity cannot be empty");
+		yyerror(buffer); YYERROR;
+	}
+;
 
 transmission_type: STRING COMMA {
-	car.transmission_type = $1;
-	if(strcmp("Manual", car.transmission_type) == 0) num_manual++;
-	else if(strcmp("Automatic", car.transmission_type) == 0) num_automatic++;
-};
+		car.transmission_type = $1;
+		if(strcmp("Manual", car.transmission_type) == 0) num_manual++;
+		else if(strcmp("Automatic", car.transmission_type) == 0) num_automatic++;
+		else {
+			snprintf(buffer, sizeof(buffer), "transmission_type could only be: Manual or Automatic");
+			yyerror(buffer); YYERROR;
+		}
+	}
+	| COMMA {
+		snprintf(buffer, sizeof(buffer), "transmission_type cannot be empty");
+		yyerror(buffer); YYERROR;
+	}
+;
 
 fuel_tank_capacity: FLOAT COMMA {
-	car.fuel_tank_capacity = atof($1);
-	sum_fuel_tank_capacity += car.fuel_tank_capacity;
-};
+		car.fuel_tank_capacity = atof($1);
+		sum_fuel_tank_capacity += car.fuel_tank_capacity;
+	}
+	| COMMA {
+		snprintf(buffer, sizeof(buffer), "fuel_tank_capacity cannot be empty");
+		yyerror(buffer); YYERROR;
+	}
+;
 
-body_type: STRING COMMA {car.body_type = $1;};
+body_type: STRING COMMA {
+		car.body_type = $1;
+	}
+	| COMMA {
+		snprintf(buffer, sizeof(buffer), "body_type cannot be empty");
+		yyerror(buffer); YYERROR;
+	}
+;
 
 rating: FLOAT COMMA {
-	car.rating = atof($1);
-	sum_rating += car.rating;
-};
+		car.rating = atof($1);
+		sum_rating += car.rating;
+	}
+	| COMMA {
+		snprintf(buffer, sizeof(buffer), "rating cannot be empty");
+		yyerror(buffer); YYERROR;
+	}
+;
 
 starting_price: INT COMMA {
-	car.starting_price = atoi($1);
-	sum_starting_price += car.starting_price;
-};
+		car.starting_price = atoi($1);
+		sum_starting_price += car.starting_price;
+	}
+	| COMMA {
+		snprintf(buffer, sizeof(buffer), "starting_price cannot be empty");
+		yyerror(buffer); YYERROR;
+	}
+;
 
 ending_price: INT COMMA {
-	car.ending_price = atoi($1);
-	sum_ending_price += car.ending_price;
-};
+		car.ending_price = atoi($1);
+		sum_ending_price += car.ending_price;
+	}
+	| COMMA {
+		snprintf(buffer, sizeof(buffer), "ending_price cannot be empty");
+		yyerror(buffer); YYERROR;
+	}
+;
 
 max_torque_nm: FLOAT COMMA {
-	car.max_torque_nm = atof($1);
-	sum_max_torque_nm += car.max_torque_nm;
-};
+		car.max_torque_nm = atof($1);
+		sum_max_torque_nm += car.max_torque_nm;
+	}
+	| COMMA {
+		snprintf(buffer, sizeof(buffer), "max_torque_nm cannot be empty");
+		yyerror(buffer); YYERROR;
+	}
+;
 
 max_torque_rpm: INT COMMA {
-	car.max_torque_rpm = atoi($1);
-	sum_max_torque_rpm += car.max_torque_rpm;
-};
+		car.max_torque_rpm = atoi($1);
+		sum_max_torque_rpm += car.max_torque_rpm;
+	}
+	| COMMA {
+		snprintf(buffer, sizeof(buffer), "max_torque_rpm cannot be empty");
+		yyerror(buffer); YYERROR;
+	}
+;
 
 max_power_bhp: FLOAT COMMA {
-	car.max_power_bhp = atof($1);
-	sum_max_power_bhp += car.max_power_bhp;
-};
+		car.max_power_bhp = atof($1);
+		sum_max_power_bhp += car.max_power_bhp;
+	}
+	| COMMA {
+		snprintf(buffer, sizeof(buffer), "max_power_bhp cannot be empty");
+		yyerror(buffer); YYERROR;
+	}
+;
 
 max_power_rpm: INT {
-	car.max_power_rpm = atoi($1);
-	sum_max_power_rpm += car.max_power_rpm;
-};
+		car.max_power_rpm = atoi($1);
+		sum_max_power_rpm += car.max_power_rpm;
+	}
+	| COMMA {
+		snprintf(buffer, sizeof(buffer), "max_power_rpm cannot be empty");
+		yyerror(buffer); YYERROR;
+	}
+;
 
 %%
 

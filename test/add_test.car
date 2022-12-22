@@ -34,7 +34,7 @@ ADD_CAR:Nissan Magnite,Petrol,999,3,5.0,Automatic,40.0,SUV,4.5,6801,12293,152.0,
 ADD_CAR:Renault KWID,Petrol,999,3,5.0,Automatic,28.0,Hatchback,4.5,5286,6824,91.0,4250,67.06,5500
 ADD_CAR:Land Rover Defender,Petrol,4997,4,7.0,Automatic,89.0,SUV,4.5,91966,249512,650.0,2500,296.36,4000
 ADD_CAR:Maruti Alto 800,CNG,796,3,5.0,Manual,60.0,Hatchback,4.5,3862,5730,60.0,3500,40.36,6000
-ADD_CAR:Hyundai Kona Electric,Electric,0,0,5.0,Electric,50.0,SUV,4.5,27161,27377,395.0,0,134.1,0
+ADD_CAR:Hyundai Kona Electric,Electric,0,0,5.0,Automatic,50.0,SUV,4.5,27161,27377,395.0,0,134.1,0
 ADD_CAR:Tata Tigor,CNG,1199,3,5.0,Manual,60.0,Sedan,4.5,6835,9786,95.0,3500,72.4,6000
 ADD_CAR:Renault Kiger,Petrol,999,3,5.0,Automatic,40.0,SUV,4.5,6824,12099,152.0,4400,98.63,5000
 ADD_CAR:Maruti S-Presso,Petrol,998,3,5.0,Automatic,27.0,Hatchback,4.5,4842,6824,89.0,3500,65.71,5500
